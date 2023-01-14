@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Upload images using Python and Flask</title>
+<link rel="stylesheet" href="css/style.css">
+<body style="width: 50%; margin: 0 auto;">
+    <div class="signup-form" style="margin-top: 50px;">
+        <form method="post" action="/" enctype="multipart/form-data">
+        <h5>Upload files using Python and Flask</h5>
+        <div class="form-group">
+            {% if msg %}
+            <div class="alert alert-info" role="alert">
+                <ul><li>{{ msg }}</li></ul>
+            </div>
+            {% endif %}
+            <div class="ui-widget">
+                <label for="tags">Upload File(s):</label>
+                <input type="file" class="form-control" name="file" placeholder="select a file to upload" required>
+                <br />
+                <input type="submit" name="submit" class="btn btn-success btn-lg btn-block" value="Upload File(s)">
+            </div>
+        </div>
+        </form>
+    </div>
+</body>
+</html>
