@@ -3,14 +3,12 @@ import os
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-import numpy as np
 import librosa
 import soundfile as sf
 
 from sklearn.preprocessing import OneHotEncoder
 from flask import request , render_template
 from pydub import AudioSegment
-from playsound import playsound 
 from IPython.display import Audio
 
 
@@ -47,7 +45,6 @@ def extract_features(data, sample_rate, frame_length=2048, hop_length=512):
 def get_features(path):
      # duration and offset are used to take care of the no audio in start and the ending of each audio files as seen above.
     data, sample_rate = librosa.load(path, offset=0.4)
-    sf.write('ang.wav', data, sample_rate, format='wav')
     data = data.T
     
     res1 = extract_features(data,sample_rate)
@@ -59,7 +56,7 @@ def checker(sent_audio):
     
     msg=get_features(sent_audio)
     
-    Y=['angry', 'fear', 'happy', 'neutral', 'sad', 'surprise']
+    Y=['angry', 'happy', 'neutral', 'sad', 'surprise']
     encoder = OneHotEncoder()
     Y = encoder.fit_transform(np.array(Y).reshape(-1,1)).toarray()
 
@@ -69,10 +66,18 @@ def checker(sent_audio):
     data.shape
     
 
-    model = tf.keras.models.load_model("6_Emotion_Model_new_cnn_50.h5")
-    emo=encoder.inverse_transform(model.predict(data))
+    model = tf.keras.models.load_model(".h5")
+    prediction= model.predict(data)
+    emo=encoder.inverse_transform(prediction)
 
-    return emo
+    
+    all_emotion=[100*np.max(n) for n in prediction]
+    all_emotion=dict(enumerate(all_emotion))
+    
+    classnames={0:'angry',1:'happy',2:'neutral',3:'sad',4:'surprise'}
+    all_emotion=dict((classnames[key], value) for (key, value) in all_emotion.items())
+
+    return all_emotion
 	
 
 

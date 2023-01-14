@@ -80,7 +80,7 @@ def checker(sent_audio):
     emo=encoder.inverse_transform(prediction)
 
 
-    all_emotion=[100*np.max(n) for n in prediction]
+    all_emotion=[100*np.max(n) for n in prediction[0]]
     all_emotion=dict(enumerate(all_emotion))
 
     classnames={0:'angry',1:'happy',2:'neutral',3:'sad',4:'surprise'}
@@ -170,9 +170,6 @@ def home():
             
             responce['text']= text
 
-            # responce = checker(uploaded_file)
-            #return responce[0][0]
-            #return checker(uploaded_file)
             return responce
 
     return render_template('index.html')
