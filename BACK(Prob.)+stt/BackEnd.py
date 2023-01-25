@@ -57,28 +57,19 @@ def get_features(path):
     #sf.write('ang.wav', data, sample_rate, format='wav')
     data = data.T
     
-    res1 = extract_features(data,sample_rate)
-    result = np.array(res1)
+    result = extract_features(data,sample_rate)
     
     return result
 
 def checker(sent_audio):
     
     msg=get_features(sent_audio)
-    
-    Y=['angry', 'happy', 'neutral', 'sad', 'surprise']
-    encoder = OneHotEncoder()
-    Y = encoder.fit_transform(np.array(Y).reshape(-1,1)).toarray()
-
 
     data = pd.DataFrame(msg)
     data = np.expand_dims(data, axis=0)
-    data.shape
 
     model = tf.keras.models.load_model("5__Emotion_Model_new_cnn_83_acc.h5")
     prediction= model.predict(data)
-    emo=encoder.inverse_transform(prediction)
-
 
     all_emotion=[100*np.max(n) for n in prediction[0]]
     all_emotion=dict(enumerate(all_emotion))
