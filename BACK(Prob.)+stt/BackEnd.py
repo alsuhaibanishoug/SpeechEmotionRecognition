@@ -16,8 +16,6 @@ import arabic_reshaper
 from bidi.algorithm import get_display
 
 
-
-
 app = flask.Flask(__name__, template_folder='template')
 app.config["DEBUG"] = True
 
@@ -54,7 +52,6 @@ def extract_features(data, sample_rate):
 def get_features(path):
     # duration and offset are used to take care of the no audio in start and the ending of each audio files as seen above.
     data, sample_rate = librosa.load(path, offset=0.4)
-    #sf.write('ang.wav', data, sample_rate, format='wav')
     data = data.T
     
     result = extract_features(data,sample_rate)
@@ -68,10 +65,10 @@ def checker(sent_audio):
     data = pd.DataFrame(msg)
     data = np.expand_dims(data, axis=0)
 
-    model = tf.keras.models.load_model("5__Emotion_Model_new_cnn_83_acc.h5")
+    model = tf.keras.models.load_model("5_Emotion_Model_cnn_87.h5", compile=False)
     prediction= model.predict(data)
 
-    all_emotion=[100*np.max(n) for n in prediction[0]]
+    all_emotion=[str(100*np.max(n)) for n in prediction[0]]
     all_emotion=dict(enumerate(all_emotion))
 
     classnames={0:'angry',1:'happy',2:'neutral',3:'sad',4:'surprise'}
@@ -81,22 +78,16 @@ def checker(sent_audio):
 	
 # a function that splits the audio file into chunks
 # and applies speech recognition
-def get_large_audio_transcription(path, lang):
-    """
-    Splitting the large audio file into chunks
-    and apply speech recognition on each of these chunks
-    """
+def audio_transcription(path, lang):
+ 
     # open the audio file using pydub
     sound = AudioSegment.from_wav(path)  
-    # split audio sound where silence is 700 miliseconds or more and get chunks
+    # split audio sound where silence is 1 second or more and get chunks
     chunks = split_on_silence(sound,
-        # experiment with this value for your target audio file
-        min_silence_len = 500,
-        # adjust this per requirement
-        silence_thresh = sound.dBFS-14,
-        # keep the silence for 1 second, adjustable as well
-        keep_silence=500,
-    )
+                              min_silence_len = 1000,
+                              silence_thresh = sound.dBFS-14,
+                              keep_silence=200)
+    
     folder_name = "audio-chunks"
     # create a directory to store the audio chunks
     if not os.path.isdir(folder_name):
@@ -121,7 +112,6 @@ def get_large_audio_transcription(path, lang):
                 print("Error:", str(e))
             else:
                 text = f"{text.capitalize()}. "
-                #print(chunk_filename, ":", text)
                 whole_text += text
     
     if(lang == 'ar'):
@@ -155,9 +145,9 @@ def home():
             responce = checker(uploaded_file)
             
             if _ == 'ar':
-                text = get_large_audio_transcription(uploaded_file, 'ar')
+                text = audio_transcription(uploaded_file, 'ar')
             else:
-                text = get_large_audio_transcription(uploaded_file, 'en')
+                text = audio_transcription(uploaded_file, 'en')
             
             responce['text']= text
 
