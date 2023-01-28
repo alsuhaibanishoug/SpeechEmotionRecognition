@@ -4,11 +4,10 @@ import pandas as pd
 import tensorflow as tf
 import numpy as np
 import librosa
-from sklearn.preprocessing import OneHotEncoder
 from flask import request , render_template
 from pydub import AudioSegment
 #pip install speechrecognition
-import speech_recognition as sr 
+import speech_recognition as Speech 
 from pydub.silence import split_on_silence
 #pip install arabic_reshaper 
 import arabic_reshaper
@@ -20,7 +19,7 @@ app = flask.Flask(__name__, template_folder='template')
 app.config["DEBUG"] = True
 
 # create a speech recognition object
-r = sr.Recognizer()
+Speech_Recognition = Speech.Recognizer()
 
 
 #logic starts
@@ -60,7 +59,7 @@ def get_features(path):
 
 def checker(sent_audio):
     
-    msg=get_features(sent_audio)
+    msg = get_features(sent_audio)
 
     data = pd.DataFrame(msg)
     data = np.expand_dims(data, axis=0)
@@ -100,15 +99,15 @@ def audio_transcription(path, lang):
         chunk_filename = os.path.join(folder_name, f"chunk{i}.wav")
         audio_chunk.export(chunk_filename, format="wav")
         # recognize the chunk
-        with sr.AudioFile(chunk_filename) as source:
-            audio_listened = r.record(source)
+        with Speech.AudioFile(chunk_filename) as source:
+            audio_listened = Speech_Recognition.record(source)
             # try converting it to text
             try:
                 if(lang == 'ar'):
-                    text = r.recognize_google(audio_listened, language = 'ar-SA')
+                    text = Speech_Recognition.recognize_google(audio_listened, language = 'ar-SA')
                 else:
-                    text = r.recognize_google(audio_listened)
-            except sr.UnknownValueError as e:
+                    text = Speech_Recognition.recognize_google(audio_listened)
+            except Speech.UnknownValueError as e:
                 print("Error:", str(e))
             else:
                 text = f"{text.capitalize()}. "
@@ -118,7 +117,6 @@ def audio_transcription(path, lang):
         reshaped_text = arabic_reshaper.reshape(whole_text)    # correct its shape
         whole_text = get_display(reshaped_text)                # correct its direction
 
-    # return the text for all chunks detected
     return whole_text
 
 
