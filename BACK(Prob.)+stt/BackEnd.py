@@ -50,7 +50,7 @@ def extract_features(data, sample_rate):
 
 def get_features(path):
     # duration and offset are used to take care of the no audio in start and the ending of each audio files as seen above.
-    data, sample_rate = librosa.load(path, offset=0.4)
+    data, sample_rate = librosa.load(path, sr=None, offset=0.4)
     data = data.T
     
     result = extract_features(data,sample_rate)
