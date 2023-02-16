@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "713398509393",
+    "project_id": "saghi-da3ad",
+    "storage_bucket": "saghi-da3ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713398509393:android:2b2996cfff761e59c63d70",
+        "android_client_info": {
+          "package_name": "com.example.saghi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713398509393-8ff7q234lptj28emjalj2ommdgm89vlv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq8cH-XPQu1ozLOaE5K6_-j8NJdnFiOSA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713398509393-8ff7q234lptj28emjalj2ommdgm89vlv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

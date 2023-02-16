@@ -5,7 +5,6 @@ import 'package:saghi/shared/helper/mangers/colors.dart';
 import 'package:saghi/shared/helper/mangers/size_config.dart';
 import 'package:saghi/widget/app_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../../../main_layout/cubit/main_cubit.dart';
 import 'widget/custom_page_view.dart';
 
 class GuidelinesScreen extends StatelessWidget {
@@ -43,7 +42,6 @@ class GuidelinesScreen extends StatelessWidget {
                     BottomNavigationBar(
                       items: cubit.bottomNavItems,
                       currentIndex: cubit.currentIndex,
-
                     ),
                     SizedBox(height: SizeConfigManger.bodyHeight * .1),
                     Expanded(

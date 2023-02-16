@@ -13,4 +13,11 @@ class UploadAudioLoading extends SpeechState {}
 class GetUserEmoji extends SpeechState {}
 class ChooseAudioSuccess extends SpeechState {}
 class ChooseLangModel extends SpeechState {}
+class ChangePlayingState extends SpeechState {}
+class StopRecorderState extends SpeechState {}
+
+
+class GetFavItemsLoading extends SpeechState {}
+class GetFavItemsSuccess extends SpeechState {}
+class GetFavItemsError extends SpeechState {}
 

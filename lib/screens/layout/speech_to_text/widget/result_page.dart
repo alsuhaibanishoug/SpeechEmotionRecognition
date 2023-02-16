@@ -124,6 +124,8 @@ class ResultScreen extends StatelessWidget {
                                   id: ConstantsManger.defaultValue,
                                   text: cubit.responseModel!.text,
                                   sad: cubit.responseModel!.sad,
+                                  userId:
+                                      FirebaseAuth.instance.currentUser!.uid,
                                   surprise: cubit.responseModel!.surprise,
                                   angry: cubit.responseModel!.angry,
                                   happy: cubit.responseModel!.happy,
@@ -140,7 +142,9 @@ class ResultScreen extends StatelessWidget {
                                 });
 
                                 Fluttertoast.showToast(
-                                    msg: "Add To Favourite Successfully");
+                                  msg: "Add To Favourite Successfully",
+                                  backgroundColor: Colors.green,
+                                );
                                 navigateToAndFinish(context, MainLayout());
                               },
                               child: Container(
@@ -149,7 +153,8 @@ class ResultScreen extends StatelessWidget {
                                   shape: BoxShape.circle,
                                   color: ColorsManger.darkPrimary,
                                 ),
-                                child: Image.asset("assets/images/keep.png"),
+                                child: const Icon(Icons.thumb_up_alt_rounded,
+                                    color: Colors.white),
                               ),
                             ),
                             AppText(text: "Keep")
@@ -165,7 +170,8 @@ class ResultScreen extends StatelessWidget {
                                   shape: BoxShape.circle,
                                   color: ColorsManger.darkPrimary,
                                 ),
-                                child: Image.asset("assets/images/remove.png"),
+                                child: const Icon(Icons.delete,
+                                    color: Colors.white),
                               ),
                             ),
                             AppText(text: "Discard"),
@@ -262,7 +268,7 @@ class ResultScreen extends StatelessWidget {
               SizedBox(height: SizeConfigManger.bodyHeight * .02),
 /*
               Visibility(
-                visible: FirebaseAuth.instance.currentUser != null,
+                visible: FirebaseAuth.instance.currentUser == null,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: SizeConfigManger.bodyHeight * .08),

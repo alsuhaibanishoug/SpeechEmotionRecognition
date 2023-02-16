@@ -1,21 +1,19 @@
+import 'dart:async';
 import 'dart:io';
-import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_tts/flutter_tts.dart';
-import 'package:uuid/uuid.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:saghi/models/ResponseModel.dart';
+import 'package:saghi/models/audio_model.dart';
 import 'package:saghi/models/emotion_model.dart';
 import 'package:saghi/models/language_model.dart';
-import 'package:speech_to_text/speech_recognition_result.dart';
-import 'package:speech_to_text/speech_to_text.dart';
-
 import '../../../../shared/helper/mangers/assets_manger.dart';
 import '../../../../shared/helper/mangers/colors.dart';
+import 'package:flutter_audio_recorder3/flutter_audio_recorder3.dart';
+import 'dart:io' as io;
 
 part 'speech_state.dart';
 
@@ -24,20 +22,72 @@ class SpeechCubit extends Cubit<SpeechState> {
 
   static SpeechCubit get(context) => BlocProvider.of(context);
 
-  SpeechToText speechToText = SpeechToText();
-  bool speechEnabled = false;
-  String lastWords = '';
+  bool isPlaying = false;
 
-  void init() async {
-    speechEnabled = await speechToText.initialize();
-    emit(State1());
+  FlutterAudioRecorder3? _recorder;
+  Recording? _current;
+  RecordingStatus _currentStatus = RecordingStatus.Unset;
+
+  init() async {
+    try {
+      bool hasPermission = await FlutterAudioRecorder3.hasPermissions ?? false;
+
+      if (hasPermission) {
+        String customPath = '/flutter_audio_recorder_';
+        io.Directory appDocDirectory;
+        if (io.Platform.isIOS) {
+          appDocDirectory = await getApplicationDocumentsDirectory();
+        } else {
+          appDocDirectory = (await getExternalStorageDirectory())!;
+        }
+
+        customPath = appDocDirectory.path +
+            customPath +
+            DateTime.now().millisecondsSinceEpoch.toString();
+
+        _recorder =
+            FlutterAudioRecorder3(customPath, audioFormat: AudioFormat.WAV);
+
+        await _recorder!.initialized;
+        var current = await _recorder!.current(channel: 0);
+        _current = current;
+        _currentStatus = current!.status!;
+        emit(ChangePlayingState());
+      } else {}
+    } catch (e) {
+      print(e);
+    }
   }
 
-  void startListening() async {
-    await speechToText.listen(
-      onResult: onSpeechResult,
-    );
-    emit(State2());
+  start() async {
+    try {
+      await _recorder!.start();
+      isPlaying = true;
+      var recording = await _recorder!.current(channel: 0);
+      _current = recording;
+      emit(State1());
+      const tick = const Duration(milliseconds: 50);
+      new Timer.periodic(tick, (Timer t) async {
+        if (_currentStatus == RecordingStatus.Stopped) {
+          t.cancel();
+        }
+
+        var current = await _recorder!.current(channel: 0);
+        _current = current;
+        _currentStatus = _current!.status!;
+        emit(State2());
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  stop() async {
+    var result = await _recorder!.stop();
+    isPlaying = false;
+    uploadAudioFile(
+        audioPath: "${result!.path}",
+        audioLang: "${choosdLangModel!.languageCode}.wav");
   }
 
   String? lang;
@@ -49,16 +99,6 @@ class SpeechCubit extends Cubit<SpeechState> {
       lang = "ar-SA";
     }
     emit(ChangeLangState());
-  }
-
-  Future<void> stopListening() async {
-    await speechToText.stop();
-    emit(State3());
-  }
-
-  void onSpeechResult(SpeechRecognitionResult result) {
-    lastWords = result.recognizedWords;
-    emit(State4());
   }
 
   File? audioFile;
@@ -80,6 +120,7 @@ class SpeechCubit extends Cubit<SpeechState> {
   ResponseModel? responseModel;
 
   void uploadAudioFile({required String audioPath, required audioLang}) async {
+    print(audioLang);
     emit(UploadAudioLoading());
     Dio dio = Dio();
     final formData = FormData.fromMap({
@@ -145,6 +186,9 @@ class SpeechCubit extends Cubit<SpeechState> {
         }
       });
       emit(GetUserEmoji());
+    }).catchError((error) {
+      print(error.response.data);
+      print(error.response.statusCode);
     });
   }
 
@@ -155,23 +199,71 @@ class SpeechCubit extends Cubit<SpeechState> {
     emit(ChooseLangModel());
   }
 
-  void convertTextToVoise({required String words}) async {
-    await stopListening();
-    final FlutterTts _flutterTts = FlutterTts();
+  EmotionModel? emotionResultModel;
+  AudioModel? audioModel2;
 
-    await _flutterTts.setLanguage(lang!);
+  void getFavItemData({required String docId}) {
+    emit(GetFavItemsLoading());
+    FirebaseFirestore.instance
+        .collection("favouriteAudio")
+        .doc(docId)
+        .get()
+        .then((value) {
+      audioModel2 = AudioModel.fromJson(map: value.data() ?? {});
 
-    await _flutterTts.setSpeechRate(1.0);
-    await _flutterTts.setVolume(1.0);
-    await _flutterTts.setPitch(1.0);
-    if (Platform.isIOS) _flutterTts.setSharedInstance(true);
-    var uuid = Uuid();
-    String name = uuid.v1().split("-")[0];
-    String fileName = Platform.isAndroid ? '$name.wav' : '$name.caf';
+      listEmotionModel.clear();
+      _emotionListDouble.clear();
 
-    await _flutterTts.synthesizeToFile(words, fileName);
-    final externalDirectory = await getExternalStorageDirectory();
-    var path = '${externalDirectory!.path}/$fileName';
-    uploadAudioFile(audioPath: path, audioLang: "ar");
+      double angry = double.parse(audioModel2!.angry ?? "");
+      double sad = double.parse("${audioModel2!.sad}");
+      double surprise = double.parse("${audioModel2!.surprise}");
+      double happy = double.parse("${audioModel2!.happy}");
+      double neutral = double.parse("${audioModel2!.neutral}");
+      String text = audioModel2!.text ?? '';
+
+      listEmotionModel.add(EmotionModel(
+          value: angry,
+          emojy: AssetsManger.angry,
+          title: "Angry",
+          color: ColorsManger.red));
+      listEmotionModel.add(EmotionModel(
+          value: sad,
+          emojy: AssetsManger.sad,
+          title: "sad",
+          color: ColorsManger.orange));
+      listEmotionModel.add(EmotionModel(
+          value: surprise,
+          emojy: AssetsManger.surprise,
+          title: "Surprised",
+          color: ColorsManger.orangeLight));
+      listEmotionModel.add(EmotionModel(
+          value: happy,
+          emojy: AssetsManger.happy,
+          title: "Happy",
+          color: ColorsManger.blue));
+      listEmotionModel.add(EmotionModel(
+          value: neutral,
+          emojy: AssetsManger.neutral,
+          title: "Neutral",
+          color: Colors.green));
+
+      List<double> customList = [];
+
+      customList.add(angry);
+      customList.add(sad);
+      customList.add(surprise);
+      customList.add(happy);
+      customList.add(neutral);
+
+      double maxValue =
+          customList.reduce((curr, next) => curr > next ? curr : next);
+
+      for (var element in listEmotionModel) {
+        if (element.value == maxValue) {
+          emotionResultModel = element;
+        }
+      }
+      emit(GetFavItemsSuccess());
+    });
   }
 }

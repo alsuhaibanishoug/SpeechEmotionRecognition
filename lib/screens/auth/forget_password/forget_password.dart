@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saghi/layout_un_registerd/layout_un_registerd.dart';
 import 'package:saghi/screens/auth/forget_password/cubit/forget_cubit.dart';
 import 'package:saghi/screens/auth/login/login_screen.dart';
 import 'package:saghi/shared/helper/mangers/assets_manger.dart';
+import 'package:saghi/shared/helper/mangers/colors.dart';
 import 'package:saghi/shared/helper/mangers/size_config.dart';
 import 'package:saghi/shared/helper/methods.dart';
 import 'package:saghi/widget/app_text.dart';
@@ -23,11 +25,17 @@ class ForgetpasswordScreen extends StatelessWidget {
       child: BlocConsumer<ForgetCubit, ForgetState>(
         listener: (context, state) {
           if (state is ForgetError) {
-            showToast(msg: state.msg, color: Colors.red);
+            showToast(
+              msg: state.msg,
+              color: Colors.red,
+            );
           } else if (state is ForgetSuccess) {
-            showToast(msg: "سوف يتم ارسال رابط لتغيير كلمه المرور عبر البريد الالكتروني", color: Colors.green);
-
-            navigateToAndFinish(context, LoginScreen());
+            showToast(
+              msg: "A link to change the password will be sent via email",
+              color: Colors.green,
+            );
+            navigateToAndFinish(
+                context, const LayoutUnRegisterd()); //ProfileScreen(false)
           }
         },
         builder: (context, state) {
@@ -51,19 +59,19 @@ class ForgetpasswordScreen extends StatelessWidget {
                           ),
                           SizedBox(height: SizeConfigManger.bodyHeight * 0.02),
                           AppText(
-                              text: "تسجيل الدخول",
-                              color: Colors.black,
+                              text: "Sign in to Saghi",
+                              color: ColorsManger.darkPrimary,
                               fontWeight: FontWeight.bold),
                           SizedBox(height: SizeConfigManger.bodyHeight * 0.04),
                           Directionality(
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                             child: CustomTextFormField(
                               controller: email,
                               type: TextInputType.emailAddress,
-                              hintText: "البريد الإلكترونى",
+                              hintText: "Email",
                               validate: (String? value) {
                                 if (value!.isEmpty) {
-                                  return "البريد الإلكترونى مطلوب";
+                                  return "Email address is required";
                                 }
                               },
                             ),
@@ -72,19 +80,20 @@ class ForgetpasswordScreen extends StatelessWidget {
                           state is ForgetLoading
                               ? const CustomLoading()
                               : CustomButton(
-                                  press: () async{
+                                  press: () async {
                                     if (formKey.currentState!.validate()) {
-                                     await ForgetCubit.get(context)
+                                      await ForgetCubit.get(context)
                                           .forgetPassword(email: email.text);
                                     }
                                   },
-                                  text: "إرسال",
+                                  text: "Send",
                                 ),
                           SizedBox(height: SizeConfigManger.bodyHeight * 0.06),
                           AppText(
                               maxLines: 2,
                               align: TextAlign.center,
-                              text: "سوف يتم ارسال رابط لتغيير كلمه المرور عبر البريد الالكتروني",
+                              text:
+                                  "A link to change the password will be sent via email",
                               color: Colors.red,
                               fontWeight: FontWeight.w300),
                         ],

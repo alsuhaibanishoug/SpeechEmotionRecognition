@@ -15,28 +15,25 @@ class GuideLineSpeechToText extends StatefulWidget {
 }
 
 class _GuideLineSpeechToTextState extends State<GuideLineSpeechToText> {
-
-
   final GlobalKey globalKeyOne = GlobalKey();
   final GlobalKey globalKeyTwo = GlobalKey();
   final GlobalKey globalKeyThree = GlobalKey();
-  final GlobalKey globalKeyFour = GlobalKey();
-
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      ShowCaseWidget.of(context).startShowCase([globalKeyOne,globalKeyTwo,globalKeyThree,globalKeyFour]);
+      ShowCaseWidget.of(context)
+          .startShowCase([globalKeyOne, globalKeyTwo, globalKeyThree]);
     });
     super.initState();
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Padding(
-          padding: EdgeInsetsDirectional.only(top: 10,start: 10),
+          padding: EdgeInsetsDirectional.only(top: 10, start: 10),
           child: Container(
             alignment: AlignmentDirectional.topStart,
             child: ShowCaseView(
@@ -57,7 +54,7 @@ class _GuideLineSpeechToTextState extends State<GuideLineSpeechToText> {
         ),
         actions: [
           IconButton(
-              onPressed: (){},
+              onPressed: () {},
               icon: Icon(
                 Icons.help_center,
                 color: ColorsManger.darkPrimary,
@@ -66,21 +63,8 @@ class _GuideLineSpeechToTextState extends State<GuideLineSpeechToText> {
       ),
       body: Column(
         children: [
-          SizedBox(height: SizeConfigManger.bodyHeight * .02),
-          Container(
-            height: SizeConfigManger.bodyHeight * .4,
-            padding: const EdgeInsets.all(20),
-            width: SizeConfigManger.screenWidth * 0.8,
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius:
-                BorderRadius.circular(getProportionateScreenHeight(20))),
-            child: AppText(
-              text: 'Captured text...',
-            ),
-          ),
-          SizedBox(height: SizeConfigManger.bodyHeight * .02),
-          Center(child: AppText(text: "Tap To Record", textSize: 20)),
+          SizedBox(height: SizeConfigManger.bodyHeight * .45),
+          AppText(text: "Tap To Record", textSize: 20),
           SizedBox(height: SizeConfigManger.bodyHeight * .02),
           Padding(
             padding: EdgeInsetsDirectional.only(start: 80),
@@ -90,7 +74,8 @@ class _GuideLineSpeechToTextState extends State<GuideLineSpeechToText> {
               children: [
                 ShowCaseView(
                   title: "Record icon",
-                  description:"Tap the microphone and start real-time recording." ,
+                  description:
+                      "Tap the microphone and start real-time recording.",
                   globalKey: globalKeyTwo,
                   child: Container(
                     padding: EdgeInsets.all(10),
@@ -104,37 +89,35 @@ class _GuideLineSpeechToTextState extends State<GuideLineSpeechToText> {
                 SizedBox(width: SizeConfigManger.bodyHeight * .05),
                 ShowCaseView(
                   globalKey: globalKeyOne,
-                  description: "Choose the language of your audio( Arabic or English).",
+                  description:
+                      "Choose the language of your audio( Arabic or English).",
                   title: "Language icon",
                   child: PopupMenuButton<LanguageModel>(
                       icon: Image.asset('assets/icons/lang.png'),
-                      onSelected: (LanguageModel item) async {
-                      },
+                      onSelected: (LanguageModel item) async {},
                       itemBuilder: (BuildContext context) =>
-                      <PopupMenuEntry<LanguageModel>>[
-                        PopupMenuItem<LanguageModel>(
-                          value: LanguageModel.choices[0],
-                          child: Row(
-                            children: [
-                              Text(LanguageModel.getCountryFlag('US')),
-                              SizedBox(
-                                  width: SizeConfigManger.bodyHeight * .02),
-                              AppText(text: "English")
-                            ],
-                          ),
-                        ),
-                        PopupMenuItem<LanguageModel>(
-                          value: LanguageModel.choices[1],
-                          child: Row(
-                            children: [
-                              Text(LanguageModel.getCountryFlag('SA')),
-                              SizedBox(
-                                  width: SizeConfigManger.bodyHeight * .02),
-                              AppText(text: "Arabic")
-                            ],
-                          ),
-                        ),
-                      ]),
+                          <PopupMenuEntry<LanguageModel>>[
+                            PopupMenuItem<LanguageModel>(
+                              value: LanguageModel.choices[0],
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                      width: SizeConfigManger.bodyHeight * .02),
+                                  AppText(text: "English")
+                                ],
+                              ),
+                            ),
+                            PopupMenuItem<LanguageModel>(
+                              value: LanguageModel.choices[1],
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                      width: SizeConfigManger.bodyHeight * .02),
+                                  AppText(text: "Arabic")
+                                ],
+                              ),
+                            ),
+                          ]),
                 ),
               ],
             ),

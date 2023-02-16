@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saghi/screens/layout/profile/profile.dart';
 import 'package:saghi/screens/layout/speech_to_text/speech_to_text.dart';
-import 'package:saghi/screens/layout/text_to_speed/text_to_speech.dart';
-
+import 'package:saghi/screens/layout/text_to_speech/text_to_speech.dart';
 import '../shared/helper/mangers/assets_manger.dart';
 import '../shared/helper/mangers/size_config.dart';
 
@@ -14,26 +13,25 @@ class LayoutUnRegisterd extends StatefulWidget {
 }
 
 class _LayoutUnRegisterdState extends State<LayoutUnRegisterd> {
-
-  int currentIndex = 0;
+  int currentIndex = 1;
 
   @override
   Widget build(BuildContext context) {
     SizeConfigManger().init(context);
     return Scaffold(
-      appBar: currentIndex == 0  ? null :AppBar(),
+      appBar: currentIndex == 2 ? AppBar() : null,
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
             activeIcon: Image.asset(
-              AssetsManger.listen,
+              AssetsManger.speacker,
               height: getProportionateScreenHeight(40),
               width: getProportionateScreenHeight(40),
               color: Colors.white,
             ),
             icon: Image.asset(
-              AssetsManger.listen,
+              AssetsManger.speacker,
               height: getProportionateScreenHeight(40),
               width: getProportionateScreenHeight(40),
               color: Colors.white,
@@ -42,13 +40,13 @@ class _LayoutUnRegisterdState extends State<LayoutUnRegisterd> {
           ),
           BottomNavigationBarItem(
             activeIcon: Image.asset(
-              AssetsManger.speacker,
+              AssetsManger.listen,
               height: getProportionateScreenHeight(40),
               width: getProportionateScreenHeight(40),
               color: Colors.white,
             ),
             icon: Image.asset(
-              AssetsManger.speacker,
+              AssetsManger.listen,
               height: getProportionateScreenHeight(40),
               width: getProportionateScreenHeight(40),
               color: Colors.white,
@@ -72,7 +70,7 @@ class _LayoutUnRegisterdState extends State<LayoutUnRegisterd> {
           ),
         ],
         currentIndex: currentIndex,
-        onTap: (index){
+        onTap: (index) {
           setState(() {
             currentIndex = index;
           });
@@ -82,8 +80,8 @@ class _LayoutUnRegisterdState extends State<LayoutUnRegisterd> {
   }
 
   List<Widget> screens = [
+    TextToSpeechScreen(),
     SpeechToTextScreen(isFromMain: false),
-    TextToSpeechScreen(isFromMain: false),
     ProfileScreen(false),
   ];
 }

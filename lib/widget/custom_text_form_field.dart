@@ -45,74 +45,6 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-/*
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: getProportionateScreenHeight(10)),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 7,
-            offset: const Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
-      child: TextFormField(
-        textAlign: textAlign ?? TextAlign.start,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: textSize ?? getProportionateScreenHeight(25),
-          fontFamily: ConstantsManger.appFont,
-        ),
-        controller: controller,
-        obscureText: isPassword == true ? true : false,
-        keyboardType: type,
-        inputFormatters: inputFormatters,
-        enabled: isEnable,
-        maxLines: maxLines,
-        validator: validate,
-        textAlignVertical: TextAlignVertical.center,
-        onChanged: onChange,
-        onTap: onTap,
-        decoration: InputDecoration(
-          hintText: hintText,
-          labelStyle: TextStyle(
-            color: Colors.grey,
-            fontSize: getProportionateScreenHeight(hintSize),
-            fontFamily: ConstantsManger.appFont,
-          ),
-          hintStyle: TextStyle(
-            color: Colors.grey,
-            fontSize: getProportionateScreenHeight(hintSize),
-            fontFamily: ConstantsManger.appFont,
-          ),
-          floatingLabelBehavior: FloatingLabelBehavior.auto,
-          suffixIcon: IconButton(
-            icon: Icon(
-              suffixIcon,
-              color: ColorsManger.darkPrimary,
-            ),
-            onPressed: onSuffixPressed,
-          ),
-          prefixIcon: prefix == null
-              ? null
-              : Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: Image(
-                    image: AssetImage(
-                      prefix!,
-                    ),
-                    height: getProportionateScreenHeight(20),
-                    width: getProportionateScreenHeight(20),
-                  ),
-                ),
-        ),
-      ),
-    );
-*/
-
     return TextFormField(
       textAlign: textAlign ?? TextAlign.start,
       style: TextStyle(
@@ -131,9 +63,7 @@ class CustomTextFormField extends StatelessWidget {
       onChanged: onChange,
       onTap: onTap,
       decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20)
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
         hintText: hintText,
         labelStyle: TextStyle(
           color: Colors.grey,
@@ -167,6 +97,5 @@ class CustomTextFormField extends StatelessWidget {
               ),
       ),
     );
-
   }
 }

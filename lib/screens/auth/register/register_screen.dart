@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saghi/screens/auth/register/cubit/register_cubit.dart';
 import 'package:saghi/shared/helper/mangers/assets_manger.dart';
+import 'package:saghi/shared/helper/mangers/colors.dart';
 import 'package:saghi/shared/helper/mangers/size_config.dart';
 import 'package:saghi/shared/helper/methods.dart';
 import 'package:saghi/widget/app_text.dart';
@@ -25,11 +26,17 @@ class RegisterScreen extends StatelessWidget {
       create: (context) => RegisterCubit(),
       child: BlocConsumer<RegisterCubit, RegisterState>(
         listener: (context, state) {
-          if(state is SuccessRegister){
+          if (state is SuccessRegister) {
             Navigator.pop(context);
-            showToast(msg: "تم التسجيل بنجاح",color: Colors.green,);
-          }else if(state is ErrorRegister){
-            showToast(msg: state.error,color: Colors.red,);
+            showToast(
+              msg: "Account created successfully",
+              color: Colors.green,
+            );
+          } else if (state is ErrorRegister) {
+            showToast(
+              msg: state.error,
+              color: Colors.red,
+            );
           }
         },
         builder: (context, state) {
@@ -54,79 +61,81 @@ class RegisterScreen extends StatelessWidget {
                           ),
                           SizedBox(height: SizeConfigManger.bodyHeight * 0.02),
                           AppText(
-                              text: "إنشاء حساب",
-                              color: Colors.black,
+                              text: "Create  an account",
+                              color: ColorsManger.darkPrimary,
                               fontWeight: FontWeight.bold),
                           SizedBox(height: SizeConfigManger.bodyHeight * 0.04),
                           Directionality(
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                             child: CustomTextFormField(
                               controller: firstName,
                               type: TextInputType.text,
-                              hintText: "الإسم الأول",
+                              hintText: "First name",
                               validate: (String? value) {
                                 if (value!.isEmpty) {
-                                  return "الإسم الأول مطلوب";
+                                  return "First name is required";
                                 }
                               },
                             ),
                           ),
                           SizedBox(height: SizeConfigManger.bodyHeight * 0.02),
                           Directionality(
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                             child: CustomTextFormField(
                               controller: lastName,
                               type: TextInputType.text,
-                              hintText: "الإسم الأخير",
+                              hintText: "Last name",
                               validate: (String? value) {
                                 if (value!.isEmpty) {
-                                  return "الإسم الأخير مطلوب";
+                                  return "Last name is required";
                                 }
                               },
                             ),
                           ),
                           SizedBox(height: SizeConfigManger.bodyHeight * 0.02),
                           Directionality(
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                             child: CustomTextFormField(
                               controller: email,
                               type: TextInputType.emailAddress,
-                              hintText: "البريد الإلكترونى",
+                              hintText: "Email",
                               validate: (String? value) {
                                 if (value!.isEmpty) {
-                                  return "البريد الإلكترونى مطلوب";
+                                  return "Email address is required";
                                 }
                               },
                             ),
                           ),
                           SizedBox(height: SizeConfigManger.bodyHeight * 0.02),
                           Directionality(
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                             child: CustomTextFormField(
                               controller: password,
                               type: TextInputType.visiblePassword,
                               isPassword: true,
-                              hintText: "كلمة المرور",
+                              hintText: "Password",
                               validate: (String? value) {
                                 if (value!.isEmpty) {
-                                  return "كلمة المرور مطلوب";
+                                  return "Password is required";
                                 }
                               },
                             ),
                           ),
                           SizedBox(height: SizeConfigManger.bodyHeight * 0.06),
-                          state is LoadingRegister ? const CustomLoading() :
-                          CustomButton(
-                            press: () {
-                              if (formKey.currentState!.validate()) {
-                                cubit.registerNewUser(email: email.text,
-                                    password: password.text,
-                                    firstName: firstName.text,
-                                    lastName: lastName.text);
-                              }
-                            },
-                            text: "إنشاء",
-                          ),
+                          state is LoadingRegister
+                              ? const CustomLoading()
+                              : CustomButton(
+                                  press: () {
+                                    if (formKey.currentState!.validate()) {
+                                      cubit.registerNewUser(
+                                          email: email.text,
+                                          password: password.text,
+                                          firstName: firstName.text,
+                                          lastName: lastName.text);
+                                    }
+                                  },
+                                  text: "Create",
+                                ),
                         ],
                       ),
                     ),

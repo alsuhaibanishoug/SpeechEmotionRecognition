@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saghi/layout_un_registerd/layout_un_registerd.dart';
 import 'package:saghi/main_layout/cubit/main_cubit.dart';
 import 'package:saghi/screens/auth/login/cubit/login_cubit.dart';
 import 'package:saghi/screens/auth/login/login_screen.dart';
@@ -29,7 +32,7 @@ class ProfileScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
   var pageController = PageController(initialPage: 0);
 
-  ProfileScreen(this.isFromMain);
+  ProfileScreen(this.isFromMain, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +113,7 @@ class ProfileScreen extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                cubit.getAllFavAudio();
+                                cubit.getAllFavResult();
                                 pageController.animateToPage(4,
                                     duration: Duration(milliseconds: 1),
                                     curve: Curves.fastLinearToSlowEaseIn);
@@ -157,7 +160,6 @@ class ProfileScreen extends StatelessWidget {
                               color: Colors.grey[400],
                             ),
                             InkWell(
-                              // onTap: () => navigateTo(context, const ContactUsScreen()),
                               onTap: () => pageController.animateToPage(3,
                                   duration: Duration(milliseconds: 100),
                                   curve: Curves.fastLinearToSlowEaseIn),
@@ -184,7 +186,6 @@ class ProfileScreen extends StatelessWidget {
                               onTap: () => pageController.animateToPage(2,
                                   duration: const Duration(milliseconds: 200),
                                   curve: Curves.fastLinearToSlowEaseIn),
-                              //   onTap: () => navigateTo(context, const AboutUsScreen()),
                               child: Row(
                                 children: [
                                   Expanded(
@@ -207,7 +208,12 @@ class ProfileScreen extends StatelessWidget {
                             InkWell(
                               onTap: () async {
                                 await FirebaseAuth.instance.signOut();
-                                navigateToAndFinish(context, LoginScreen());
+                                navigateToAndFinish(
+                                    context, const LayoutUnRegisterd());
+                                showToast(
+                                  msg: "Sign out successfully",
+                                  color: Colors.green,
+                                );
                               },
                               child: Row(
                                 children: [
@@ -242,9 +248,9 @@ class ProfileScreen extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () => pageController.animateToPage(0,
-                                  duration: Duration(milliseconds: 100),
+                                  duration: const Duration(milliseconds: 100),
                                   curve: Curves.fastLinearToSlowEaseIn),
-                              child: Align(
+                              child: const Align(
                                   alignment: Alignment.topLeft,
                                   child: Icon(Icons.arrow_back)),
                             ),
@@ -266,10 +272,10 @@ class ProfileScreen extends StatelessWidget {
                               controller: firstName
                                 ..text = cubit.userModel!.firstName,
                               type: TextInputType.text,
-                              hintText: "الإسم الأول",
+                              hintText: "First name",
                               validate: (String? value) {
                                 if (value!.isEmpty) {
-                                  return "الإسم الأول مطلوب";
+                                  return "First name is required";
                                 }
                               },
                             ),
@@ -279,10 +285,10 @@ class ProfileScreen extends StatelessWidget {
                               controller: lastName
                                 ..text = cubit.userModel!.lastName,
                               type: TextInputType.text,
-                              hintText: "الإسم الأخير",
+                              hintText: "Last name",
                               validate: (String? value) {
                                 if (value!.isEmpty) {
-                                  return "الإسم الأخير مطلوب";
+                                  return "Last name is required";
                                 }
                               },
                             ),
@@ -307,19 +313,25 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          InkWell(
-                            onTap: () => pageController.animateToPage(0,
-                                duration: Duration(milliseconds: 100),
-                                curve: Curves.fastLinearToSlowEaseIn),
-                            child: Align(
-                                alignment: Alignment.topLeft,
-                                child: Icon(Icons.arrow_back)),
+                          Row(
+                            children: [
+                              InkWell(
+                                onTap: () => pageController.animateToPage(0,
+                                    duration: Duration(milliseconds: 100),
+                                    curve: Curves.fastLinearToSlowEaseIn),
+                                child: const Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Icon(Icons.arrow_back)),
+                              ),
+                              SizedBox(
+                                  width: SizeConfigManger.bodyHeight * .12),
+                              AppText(
+                                  text: "About Saghi",
+                                  fontWeight: FontWeight.w700,
+                                  color: ColorsManger.darkPrimary,
+                                  textSize: 30),
+                            ],
                           ),
-                          AppText(
-                              text: "Saghi",
-                              fontWeight: FontWeight.w700,
-                              color: ColorsManger.darkPrimary,
-                              textSize: 30),
                           SizedBox(height: SizeConfigManger.bodyHeight * .04),
                           AppText(
                               color: ColorsManger.darkPrimary,
@@ -339,24 +351,30 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: SizeConfigManger.bodyHeight * .04,
-                          vertical: SizeConfigManger.bodyHeight * .1),
+                        horizontal: SizeConfigManger.bodyHeight * .04,
+                      ),
                       child: Column(
                         children: [
-                          InkWell(
-                            onTap: () => pageController.animateToPage(0,
-                                duration: Duration(milliseconds: 100),
-                                curve: Curves.fastLinearToSlowEaseIn),
-                            child: Align(
-                                alignment: Alignment.topLeft,
-                                child: Icon(Icons.arrow_back)),
+                          Row(
+                            children: [
+                              InkWell(
+                                onTap: () => pageController.animateToPage(0,
+                                    duration: Duration(milliseconds: 100),
+                                    curve: Curves.fastLinearToSlowEaseIn),
+                                child: const Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Icon(Icons.arrow_back)),
+                              ),
+                              SizedBox(
+                                  width: SizeConfigManger.bodyHeight * .15),
+                              AppText(
+                                  text: "Contact us",
+                                  fontWeight: FontWeight.w700,
+                                  color: ColorsManger.darkPrimary,
+                                  textSize: 30),
+                            ],
                           ),
-                          AppText(
-                              text: "Contact us by:",
-                              fontWeight: FontWeight.w700,
-                              color: ColorsManger.darkPrimary,
-                              textSize: 30),
-                          SizedBox(height: SizeConfigManger.bodyHeight * .1),
+                          SizedBox(height: SizeConfigManger.bodyHeight * .18),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -424,32 +442,95 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: SizeConfigManger.bodyHeight * .04,
-                        ),
-                        child: cubit.audioFavList.isNotEmpty
-                            ? Padding(
-                                padding: EdgeInsets.symmetric(
-                                    vertical:
-                                        SizeConfigManger.bodyHeight * .02),
-                                child: ListView.separated(
-                                    itemBuilder: (context, index) => FavItemDesign(
-                                            model: cubit.audioFavList[index],
-                                            cubit: cubit),
-                                    separatorBuilder: (context, index) =>
-                                        SizedBox(
-                                            height:
-                                                SizeConfigManger.bodyHeight *
+                      padding: EdgeInsets.symmetric(
+                        horizontal: SizeConfigManger.bodyHeight * .04,
+                      ),
+                      child: cubit.resultFavList.isNotEmpty
+                          ? Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: SizeConfigManger.bodyHeight * .02),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      InkWell(
+                                        onTap: () => pageController
+                                            .animateToPage(0,
+                                                duration: const Duration(
+                                                    milliseconds: 10),
+                                                curve: Curves
+                                                    .fastLinearToSlowEaseIn),
+                                        child: const Align(
+                                            alignment:
+                                                AlignmentDirectional.topStart,
+                                            child: Icon(Icons.arrow_back_ios)),
+                                      ),
+                                      SizedBox(
+                                          width: SizeConfigManger.bodyHeight *
+                                              .15),
+                                      AppText(
+                                          text: "History",
+                                          fontWeight: FontWeight.w700,
+                                          color: ColorsManger.darkPrimary,
+                                          textSize: 30),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                      height:
+                                          SizeConfigManger.bodyHeight * .05),
+                                  Expanded(
+                                    child: ListView.separated(
+                                        itemBuilder: (context, index) =>
+                                            FavItemDesign(
+                                                model:
+                                                    cubit.resultFavList[index],
+                                                cubit: cubit),
+                                        separatorBuilder: (context, index) =>
+                                            SizedBox(
+                                                height: SizeConfigManger
+                                                        .bodyHeight *
                                                     .02),
-                                    itemCount: cubit.audioFavList.length),
-                              )
-                            : Center(
-                                child: AppText(
-                                text: "لا يوجد بيانات",
-                                textSize: 24,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.w600,
-                              ))),
+                                        itemCount: cubit.resultFavList.length),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () => pageController.animateToPage(
+                                          0,
+                                          duration:
+                                              const Duration(milliseconds: 10),
+                                          curve: Curves.fastLinearToSlowEaseIn),
+                                      child: const Align(
+                                          alignment:
+                                              AlignmentDirectional.topStart,
+                                          child: Icon(Icons.arrow_back_ios)),
+                                    ),
+                                    SizedBox(
+                                        width:
+                                            SizeConfigManger.bodyHeight * .15),
+                                    AppText(
+                                        text: "History",
+                                        fontWeight: FontWeight.w700,
+                                        color: ColorsManger.darkPrimary,
+                                        textSize: 30),
+                                  ],
+                                ),
+                                SizedBox(
+                                    height: SizeConfigManger.bodyHeight * .4),
+                                AppText(
+                                  text: "No saved result",
+                                  textSize: 24,
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ],
+                            ),
+                    ),
                   ],
                 )
               : const CustomLoading();
@@ -459,8 +540,15 @@ class ProfileScreen extends StatelessWidget {
       return BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginError) {
-            showToast(msg: state.errorMsg, color: Colors.red);
+            showToast(
+              msg: state.errorMsg,
+              color: Colors.red,
+            );
           } else if (state is LoginSuccess) {
+            showToast(
+              msg: "Sign in successfully",
+              color: Colors.green,
+            );
             navigateToAndFinish(context, MainLayout());
           }
         },
@@ -476,6 +564,7 @@ class ProfileScreen extends StatelessWidget {
                         horizontal: SizeConfigManger.bodyHeight * .04),
                     child: Column(
                       children: [
+                        SizedBox(height: SizeConfigManger.bodyHeight * 0.02),
                         Image.asset(
                           AssetsManger.logo,
                           height: SizeConfigManger.bodyHeight * .25,
@@ -484,34 +573,34 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         SizedBox(height: SizeConfigManger.bodyHeight * 0.02),
                         AppText(
-                            text: "تسجيل الدخول",
-                            color: Colors.black,
+                            text: "Sign in to Saghi",
+                            color: ColorsManger.darkPrimary,
                             fontWeight: FontWeight.bold),
                         SizedBox(height: SizeConfigManger.bodyHeight * 0.04),
                         Directionality(
-                          textDirection: TextDirection.rtl,
+                          textDirection: TextDirection.ltr,
                           child: CustomTextFormField(
                             controller: email,
                             type: TextInputType.emailAddress,
-                            hintText: "البريد الإلكترونى",
+                            hintText: "Email",
                             validate: (String? value) {
                               if (value!.isEmpty) {
-                                return "البريد الإلكترونى مطلوب";
+                                return "Email address is required";
                               }
                             },
                           ),
                         ),
                         SizedBox(height: SizeConfigManger.bodyHeight * 0.02),
                         Directionality(
-                          textDirection: TextDirection.rtl,
+                          textDirection: TextDirection.ltr,
                           child: CustomTextFormField(
                             controller: password,
                             type: TextInputType.visiblePassword,
                             isPassword: true,
-                            hintText: "كلمة المرور",
+                            hintText: "Password",
                             validate: (String? value) {
                               if (value!.isEmpty) {
-                                return "كلمة المرور مطلوب";
+                                return "Password is required";
                               }
                             },
                           ),
@@ -527,15 +616,15 @@ class ProfileScreen extends StatelessWidget {
                                         password: password.text);
                                   }
                                 },
-                                text: "تسجيل",
+                                text: "Sign in",
                               ),
                         SizedBox(height: SizeConfigManger.bodyHeight * 0.04),
                         GestureDetector(
                           onTap: () =>
                               navigateTo(context, ForgetpasswordScreen()),
                           child: AppText(
-                              text: "هل نسيت كلمة المرور ؟",
-                              color: Colors.black,
+                              text: "Forget password?",
+                              color: ColorsManger.orangePrimary,
                               textDecoration: TextDecoration.underline,
                               fontWeight: FontWeight.bold),
                         ),
@@ -556,8 +645,8 @@ class ProfileScreen extends StatelessWidget {
                                     horizontal:
                                         getProportionateScreenHeight(10)),
                                 child: AppText(
-                                    text: "إنشاء حساب",
-                                    color: Colors.black,
+                                    text: "create account",
+                                    color: ColorsManger.darkPrimary,
                                     textDecoration: TextDecoration.underline,
                                     fontWeight: FontWeight.bold),
                               ),

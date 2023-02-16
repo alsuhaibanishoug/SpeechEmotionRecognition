@@ -5,6 +5,7 @@ import 'package:saghi/screens/auth/forget_password/forget_password.dart';
 import 'package:saghi/screens/auth/login/cubit/login_cubit.dart';
 import 'package:saghi/screens/auth/register/register_screen.dart';
 import 'package:saghi/shared/helper/mangers/assets_manger.dart';
+import 'package:saghi/shared/helper/mangers/colors.dart';
 import 'package:saghi/shared/helper/mangers/size_config.dart';
 import 'package:saghi/shared/helper/methods.dart';
 import 'package:saghi/widget/app_text.dart';
@@ -25,15 +26,24 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
-       if(state is LoginError){
-         showToast(msg: state.errorMsg, color: Colors.red);
-       }else if(state is LoginSuccess){
-         navigateToAndFinish(context, MainLayout());
-       }
+        if (state is LoginError) {
+          showToast(
+            msg: state.errorMsg,
+            color: Colors.red,
+          );
+        } else if (state is LoginSuccess) {
+          navigateToAndFinish(context, MainLayout());
+        }
       },
       builder: (context, state) {
         LoginCubit cubit = LoginCubit.get(context);
         return Scaffold(
+          appBar: AppBar(
+            title: AppText(
+              text: "",
+              textSize: 20,
+            ),
+          ),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Center(
@@ -53,61 +63,66 @@ class LoginScreen extends StatelessWidget {
                         ),
                         SizedBox(height: SizeConfigManger.bodyHeight * 0.02),
                         AppText(
-                            text: "تسجيل الدخول",
-                            color: Colors.black,
+                            text: "Sign in to Saghi",
+                            color: ColorsManger.darkPrimary,
                             fontWeight: FontWeight.bold),
                         SizedBox(height: SizeConfigManger.bodyHeight * 0.04),
                         Directionality(
-                          textDirection: TextDirection.rtl,
+                          textDirection: TextDirection.ltr,
                           child: CustomTextFormField(
                             controller: email,
                             type: TextInputType.emailAddress,
-                            hintText: "البريد الإلكترونى",
+                            hintText: "Email",
                             validate: (String? value) {
                               if (value!.isEmpty) {
-                                return "البريد الإلكترونى مطلوب";
+                                return "Email address is required";
                               }
                             },
                           ),
                         ),
                         SizedBox(height: SizeConfigManger.bodyHeight * 0.02),
                         Directionality(
-                          textDirection: TextDirection.rtl,
+                          textDirection: TextDirection.ltr,
                           child: CustomTextFormField(
                             controller: password,
                             type: TextInputType.visiblePassword,
                             isPassword: true,
-                            hintText: "كلمة المرور",
+                            hintText: "Password",
                             validate: (String? value) {
                               if (value!.isEmpty) {
-                                return "كلمة المرور مطلوب";
+                                return "Password is required";
                               }
                             },
                           ),
                         ),
                         SizedBox(height: SizeConfigManger.bodyHeight * 0.06),
-                        state is LoginLoading ? const CustomLoading():CustomButton(
-                          press: () {
-                            if(formKey.currentState!.validate()){
-                              cubit.signIn(email: email.text, password: password.text);
-                            }
-                          },
-                          text: "تسجيل",
-                        ),
+                        state is LoginLoading
+                            ? const CustomLoading()
+                            : CustomButton(
+                                press: () {
+                                  if (formKey.currentState!.validate()) {
+                                    cubit.signIn(
+                                        email: email.text,
+                                        password: password.text);
+                                  }
+                                },
+                                text: "Sign in",
+                              ),
                         SizedBox(height: SizeConfigManger.bodyHeight * 0.04),
                         GestureDetector(
                           onTap: () =>
                               navigateTo(context, ForgetpasswordScreen()),
                           child: AppText(
-                              text: "هل نسيت كلمة المرور ؟",
-                              color: Colors.black,
+                              text: "Forget password?",
+                              color: ColorsManger.orangePrimary,
                               textDecoration: TextDecoration.underline,
                               fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: SizeConfigManger.bodyHeight * 0.04),
                         Row(
                           children: [
-                            Expanded(child: Container(
+                            Expanded(
+                                child: Container(
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.grey),
                               ),
@@ -117,31 +132,22 @@ class LoginScreen extends StatelessWidget {
                                   navigateTo(context, RegisterScreen()),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: getProportionateScreenHeight(
-                                        10)),
+                                    horizontal:
+                                        getProportionateScreenHeight(10)),
                                 child: AppText(
-                                    text: "إنشاء حساب",
-                                    color: Colors.black,
+                                    text: "create account",
+                                    color: ColorsManger.darkPrimary,
                                     textDecoration: TextDecoration.underline,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
-                            Expanded(child: Container(
+                            Expanded(
+                                child: Container(
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.grey),
                               ),
                             )),
-
                           ],
-                        ),
-                        SizedBox(height: SizeConfigManger.bodyHeight * 0.15),
-                        GestureDetector(
-                          onTap: ()=>navigateTo(context, const LayoutUnRegisterd()),
-                          child: AppText(
-                              text: "الدخول كضيف",
-                              color: Colors.black,
-                              textDecoration: TextDecoration.underline,
-                              fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),

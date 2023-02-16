@@ -2,29 +2,23 @@ import 'dart:io';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:audioplayers/audioplayers.dart' as aui;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:bloc/bloc.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_storage/firebase_storage.dart' as storage;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:meta/meta.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:saghi/models/audio_model.dart';
 import 'package:saghi/models/user_model.dart';
 import 'package:saghi/screens/layout/profile/profile.dart';
 import 'package:saghi/screens/layout/speech_to_text/speech_to_text.dart';
-import 'package:saghi/screens/layout/text_to_speed/text_to_speech.dart';
+import 'package:saghi/screens/layout/text_to_speech/text_to_speech.dart';
 import 'package:saghi/shared/helper/mangers/assets_manger.dart';
 import 'package:saghi/shared/helper/mangers/constants.dart';
 import 'package:saghi/shared/helper/mangers/size_config.dart';
 import 'dart:io' show Platform;
-
-import 'package:share_plus/share_plus.dart';
 
 part 'main_state.dart';
 
@@ -36,13 +30,13 @@ class MainCubit extends Cubit<MainState> {
   List<BottomNavigationBarItem> bottomNavItems = [
     BottomNavigationBarItem(
       activeIcon: Image.asset(
-        AssetsManger.listen,
+        AssetsManger.speacker,
         height: getProportionateScreenHeight(40),
         width: getProportionateScreenHeight(40),
         color: Colors.white,
       ),
       icon: Image.asset(
-        AssetsManger.listen,
+        AssetsManger.speacker,
         height: getProportionateScreenHeight(40),
         width: getProportionateScreenHeight(40),
         color: Colors.white,
@@ -51,13 +45,13 @@ class MainCubit extends Cubit<MainState> {
     ),
     BottomNavigationBarItem(
       activeIcon: Image.asset(
-        AssetsManger.speacker,
+        AssetsManger.listen,
         height: getProportionateScreenHeight(40),
         width: getProportionateScreenHeight(40),
         color: Colors.white,
       ),
       icon: Image.asset(
-        AssetsManger.speacker,
+        AssetsManger.listen,
         height: getProportionateScreenHeight(40),
         width: getProportionateScreenHeight(40),
         color: Colors.white,
@@ -81,7 +75,7 @@ class MainCubit extends Cubit<MainState> {
     ),
   ];
 
-  int currentIndex = 0;
+  int currentIndex = 1;
 
   void changeCurrentIndex({required int index}) {
     currentIndex = index;
@@ -92,14 +86,10 @@ class MainCubit extends Cubit<MainState> {
   }
 
   List<Widget> screens = [
-    SpeechToTextScreen(
-      isFromMain: true,
-    ),
-    TextToSpeechScreen(isFromMain: true),
+    TextToSpeechScreen(),
+    SpeechToTextScreen(isFromMain: true),
     ProfileScreen(true),
   ];
-
-  List<String> titles = ["Text To Speech", "Speech To Text", "Profile Screen"];
 
   File? userImage;
 
@@ -168,7 +158,7 @@ class MainCubit extends Cubit<MainState> {
   String? soundUrl;
 
   late var fileName;
-  String ? lang;
+  String? lang;
 
   void changeLanguage({required String langCode}) {
     if (langCode == "en") {
@@ -193,13 +183,15 @@ class MainCubit extends Cubit<MainState> {
     final externalDirectory = await getExternalStorageDirectory();
     var path = '${externalDirectory!.path}/$fileName';
     final firebaseStorage = FirebaseStorage.instance;
-    var snapshot = await firebaseStorage.ref().child(ConstantsManger.allAudios).putFile(File(path), SettableMetadata(
-      contentType: 'audio/mp3',
-    ));
+    var snapshot =
+        await firebaseStorage.ref().child(ConstantsManger.allAudios).putFile(
+            File(path),
+            SettableMetadata(
+              contentType: 'audio/mp3',
+            ));
     soundUrl = await snapshot.ref.getDownloadURL();
     emit(AddAudioState());
   }
-
 
   final player = AudioPlayer();
 
@@ -218,10 +210,6 @@ class MainCubit extends Cubit<MainState> {
     emit(PlaySoundState());
   }
 
-
-
-  IconData favIcon = Icons.favorite_border;
-
 ///////////////////////////////// Profile ///////////////////
 
   void updateUserInfo({required String first, required String last}) {
@@ -236,23 +224,26 @@ class MainCubit extends Cubit<MainState> {
     });
   }
 
-  List<AudioModel> audioFavList = [];
+  List<AudioModel> resultFavList = [];
 
-  void getAllFavAudio() {
+  void getAllFavResult() {
     FirebaseFirestore.instance
         .collection(ConstantsManger.FAV)
+        .where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .snapshots()
         .listen((value) {
-      audioFavList.clear();
+      resultFavList.clear();
       for (var element in value.docs) {
-        audioFavList.add(AudioModel.fromJson(map: element.data()));
+        resultFavList.add(AudioModel.fromJson(map: element.data()));
       }
-      emit(GetAllAudioListState());
+      emit(GetAllResultListState());
     });
   }
 
-  void deleteAudio({required String id})async{
-   await FirebaseFirestore.instance
-        .collection(ConstantsManger.FAV).doc(id).delete();
+  void deleteResult({required String id}) async {
+    await FirebaseFirestore.instance
+        .collection(ConstantsManger.FAV)
+        .doc(id)
+        .delete();
   }
 }

@@ -24,12 +24,12 @@ class CareerDropDown extends StatelessWidget {
                 offset: const Offset(0, 3), // changes position of shadow
               ),
             ],
-            borderRadius: BorderRadius.all(Radius.circular(15))),
+            borderRadius:const BorderRadius.all(Radius.circular(15))),
         child: DropdownButtonHideUnderline(
           child: DropdownButton2(
             isExpanded: true,
             alignment: Alignment.center,
-            icon: Icon(Icons.arrow_drop_down),
+            icon:const Icon(Icons.arrow_drop_down),
             buttonPadding: EdgeInsetsDirectional.only(
                 end: getProportionateScreenHeight(20),
                 start: getProportionateScreenHeight(30)),

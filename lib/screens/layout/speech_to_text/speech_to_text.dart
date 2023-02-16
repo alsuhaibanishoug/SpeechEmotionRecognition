@@ -1,11 +1,11 @@
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:saghi/models/emotion_model.dart';
-import 'package:saghi/screens/darwer/guide_screen/guidelines%20_screen.dart';
+import 'package:saghi/models/language_model.dart';
 import 'package:saghi/screens/layout/speech_to_text/cubit/speech_cubit.dart';
 import 'package:saghi/screens/layout/speech_to_text/widget/result_page.dart';
-import 'package:saghi/shared/helper/mangers/assets_manger.dart';
 import 'package:saghi/shared/helper/mangers/size_config.dart';
 import 'package:saghi/shared/helper/methods.dart';
 import 'package:saghi/widget/app_text.dart';
@@ -16,7 +16,6 @@ import 'package:saghi/widget/lang_drop_down.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../models/language_model.dart';
 import '../../../shared/helper/mangers/colors.dart';
 import 'widget/guide_linde.dart';
 
@@ -28,37 +27,45 @@ class SpeechToTextScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SpeechCubit()..init(),
-      child: BlocConsumer<SpeechCubit, SpeechState>(
-        listener: (context, state) {
-          if (state is GetUserEmoji) {
-            if (isFromMain) {
-              navigateTo(
-                  context, ResultScreen(SpeechCubit.get(context), isFromMain));
-            } else {
-              pageController.animateToPage(5,
-                  duration: Duration(seconds: 2),
-                  curve: Curves.fastLinearToSlowEaseIn);
-            }
-          }
-        },
-        builder: (context, state) {
-          SpeechCubit cubit = SpeechCubit.get(context);
-          return PageView(
-            controller: pageController,
-            physics: const BouncingScrollPhysics(),
-            children: [
-              setUpBody(cubit, context, state),
-              setUpBod2(cubit),
-              setBody3(cubit),
-              setUpBody4(cubit),
-              setUpUpload(cubit, state),
-              ResultScreen(cubit, false),
-            ],
+    return BlocConsumer<SpeechCubit, SpeechState>(
+      listener: (context, state) {
+        if (state is UploadAudioLoading) {
+          showToast(
+            msg: "Your audio is being processed",
+            gravity: ToastGravity.CENTER,
           );
-        },
-      ),
+        }
+        if (state is StopRecorderState) {
+          pageController.animateToPage(3,
+              duration: const Duration(seconds: 2),
+              curve: Curves.fastLinearToSlowEaseIn);
+        }
+        if (state is GetUserEmoji) {
+          if (isFromMain) {
+            navigateTo(
+                context, ResultScreen(SpeechCubit.get(context), isFromMain));
+          } else {
+            pageController.animateToPage(5,
+                duration: const Duration(seconds: 2),
+                curve: Curves.fastLinearToSlowEaseIn);
+          }
+        }
+      },
+      builder: (context, state) {
+        SpeechCubit cubit = SpeechCubit.get(context);
+        return PageView(
+          controller: pageController,
+          physics: const BouncingScrollPhysics(),
+          children: [
+            setUpBody(cubit, context, state),
+            setUpBod2(cubit),
+            setBody3(cubit),
+            setUpBody4(cubit),
+            setUpUpload(cubit, state),
+            ResultScreen(cubit, false),
+          ],
+        );
+      },
     );
   }
 
@@ -74,7 +81,7 @@ class SpeechToTextScreen extends StatelessWidget {
                 curve: Curves.fastLinearToSlowEaseIn);
           },
           child: Padding(
-            padding: EdgeInsetsDirectional.only(top: 10, start: 10),
+            padding: const EdgeInsetsDirectional.only(top: 10, start: 10),
             child: Container(
               alignment: AlignmentDirectional.topStart,
               child: Column(
@@ -95,7 +102,7 @@ class SpeechToTextScreen extends StatelessWidget {
                   context,
                   ShowCaseWidget(
                       builder: Builder(
-                    builder: (context) => GuideLineSpeechToText(),
+                    builder: (context) => const GuideLineSpeechToText(),
                   ))),
               icon: Icon(
                 Icons.help_center,
@@ -111,55 +118,53 @@ class SpeechToTextScreen extends StatelessWidget {
       appBar: createAppBar(context, state),
       body: Column(
         children: [
-          SizedBox(height: SizeConfigManger.bodyHeight * .02),
-          Container(
-            height: SizeConfigManger.bodyHeight * .4,
-            padding: const EdgeInsets.all(20),
-            width: SizeConfigManger.screenWidth * 0.8,
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius:
-                    BorderRadius.circular(getProportionateScreenHeight(20))),
-            child: AppText(
-              text: 'Captured text...',
-            ),
-          ),
-          SizedBox(height: SizeConfigManger.bodyHeight * .02),
-          Center(child: AppText(text: "Tap To Record", textSize: 20)),
-          SizedBox(height: SizeConfigManger.bodyHeight * .02),
+          SizedBox(height: SizeConfigManger.bodyHeight * .45),
+          AppText(
+              text: cubit.isPlaying ? " Tap To Stop" : " Tap To Record",
+              textSize: 20),
           Padding(
-            padding: EdgeInsetsDirectional.only(start: 80),
+            padding: const EdgeInsetsDirectional.only(start: 80),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                InkWell(
-                  onTap: () {
-                    if (cubit.lang == null) {
-                      Fluttertoast.showToast(
-                          msg: "please choose language first",
-                          gravity: ToastGravity.CENTER);
-                    } else {
-                      cubit.startListening();
-                      pageController.animateToPage(1,
-                          duration: const Duration(milliseconds: 1),
-                          curve: Curves.fastLinearToSlowEaseIn);
-                    }
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: ColorsManger.darkPrimary,
-                    ),
-                    child: const Icon(Icons.mic, size: 60, color: Colors.white),
-                  ),
-                ),
-                SizedBox(width: SizeConfigManger.bodyHeight * .05),
+                state is UploadAudioLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(color: Colors.blue),
+                      )
+                    : Container(
+                        child: AvatarGlow(
+                          endRadius: 80,
+                          animate: cubit.isPlaying,
+                          glowColor: ColorsManger.orangePrimary,
+                          child: FloatingActionButton.large(
+                              backgroundColor: cubit.isPlaying
+                                  ? ColorsManger.orangePrimary
+                                  : ColorsManger.darkPrimary,
+                              onPressed: () {
+                                if (cubit.lang == null) {
+                                  showToast(
+                                    msg: "please choose language first",
+                                    gravity: ToastGravity.CENTER,
+                                    color: Colors.red,
+                                  );
+                                } else {
+                                  cubit.isPlaying
+                                      ? cubit.stop()
+                                      : cubit.start();
+                                }
+                              },
+                              child: cubit.isPlaying
+                                  ? Icon(Icons.square_rounded, size: 40)
+                                  : Icon(Icons.mic, size: 70)),
+                        ),
+                      ),
+                SizedBox(width: SizeConfigManger.bodyHeight * .02),
                 PopupMenuButton<LanguageModel>(
                     icon: Image.asset('assets/icons/lang.png'),
                     onSelected: (LanguageModel item) async {
                       cubit.changeLanguage(langCode: item.languageCode);
+                      cubit.chooseLangModel(item);
                     },
                     itemBuilder: (BuildContext context) =>
                         <PopupMenuEntry<LanguageModel>>[
@@ -167,7 +172,6 @@ class SpeechToTextScreen extends StatelessWidget {
                             value: LanguageModel.choices[0],
                             child: Row(
                               children: [
-                                Text(LanguageModel.getCountryFlag('US')),
                                 SizedBox(
                                     width: SizeConfigManger.bodyHeight * .02),
                                 AppText(text: "English")
@@ -178,7 +182,6 @@ class SpeechToTextScreen extends StatelessWidget {
                             value: LanguageModel.choices[1],
                             child: Row(
                               children: [
-                                Text(LanguageModel.getCountryFlag('SA')),
                                 SizedBox(
                                     width: SizeConfigManger.bodyHeight * .02),
                                 AppText(text: "Arabic")
@@ -208,7 +211,7 @@ class SpeechToTextScreen extends StatelessWidget {
               borderRadius:
                   BorderRadius.circular(getProportionateScreenHeight(20))),
           child: AppText(
-            text: cubit.lastWords,
+            text: "cubit.lastWords",
             maxLines: 25,
           ),
         ),
@@ -217,7 +220,6 @@ class SpeechToTextScreen extends StatelessWidget {
         SizedBox(height: SizeConfigManger.bodyHeight * .02),
         InkWell(
           onTap: () async {
-            cubit.stopListening();
             pageController.previousPage(
                 duration: Duration(milliseconds: 200),
                 curve: Curves.bounceInOut);
@@ -238,7 +240,7 @@ class SpeechToTextScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AbsorbPointer(
-                absorbing: cubit.speechToText.isListening,
+                absorbing: true /*"cubit.speechToText.isListening"*/,
                 child: InkWell(
                   onTap: () async {
                     pageController.previousPage(
@@ -256,13 +258,9 @@ class SpeechToTextScreen extends StatelessWidget {
                 ),
               ),
               AbsorbPointer(
-                absorbing: cubit.speechToText.isListening,
+                absorbing: true /*cubit.speechToText.isListening*/,
                 child: InkWell(
-                  onTap: () async {
-                    cubit.stopListening().then((value) {
-                      cubit.convertTextToVoise(words: cubit.lastWords);
-                    });
-                  },
+                  onTap: () async {},
                   child: Container(
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
@@ -282,28 +280,30 @@ class SpeechToTextScreen extends StatelessWidget {
   }
 
   Widget setBody3(SpeechCubit cubit) {
-    return cubit.emotionModel == null
-        ? Center(
-            child: CustomLoading(),
-          )
-        : SafeArea(
-            child: Column(
-            children: [
-              SizedBox(height: SizeConfigManger.bodyHeight * .02),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: SizeConfigManger.bodyHeight * .05),
-                child: Align(
-                    alignment: AlignmentDirectional.topStart,
-                    child: AppText(
-                        text: "Speaker is mostly:",
-                        fontWeight: FontWeight.w500,
-                        textSize: 22)),
-              ),
-              EmotionDesign(_getEmotionModel(emo: cubit.emotionModel!.title)),
-              SizedBox(height: SizeConfigManger.bodyHeight * .02),
-            ],
-          ));
+    if (cubit.emotionModel == null) {
+      return const Center(
+        child: CustomLoading(),
+      );
+    } else {
+      return SafeArea(
+          child: Column(
+        children: [
+          SizedBox(height: SizeConfigManger.bodyHeight * .02),
+          Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: SizeConfigManger.bodyHeight * .05),
+            child: Align(
+                alignment: AlignmentDirectional.topStart,
+                child: AppText(
+                    text: "Speaker is mostly:",
+                    fontWeight: FontWeight.w500,
+                    textSize: 22)),
+          ),
+          EmotionDesign(_getEmotionModel(emo: cubit.emotionModel!.title)),
+          SizedBox(height: SizeConfigManger.bodyHeight * .02),
+        ],
+      ));
+    }
   }
 
   Widget setUpBody4(SpeechCubit cubit) {
@@ -477,7 +477,7 @@ class SpeechToTextScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(
                 horizontal: SizeConfigManger.bodyHeight * .02),
             child: state is UploadAudioLoading
-                ? Center(
+                ? const Center(
                     child: CustomLoading(),
                   )
                 : CustomButton(
@@ -521,7 +521,7 @@ class SpeechToTextScreen extends StatelessWidget {
       case "neutral":
         return emojiList[4];
       default:
-        return emojiList[0];
+        return emojiList[4];
     }
   }
 }
