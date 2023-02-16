@@ -61,7 +61,6 @@ class ProfileScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height: SizeConfigManger.bodyHeight * .02),
                             InkWell(
                                 onTap: () => pageController.animateToPage(1,
                                     duration: const Duration(milliseconds: 200),
@@ -144,7 +143,7 @@ class ProfileScreen extends StatelessWidget {
                                 children: [
                                   Expanded(
                                       child: AppText(
-                                          text: "How to use SAGHI",
+                                          text: "How to use Saghi",
                                           fontWeight: FontWeight.bold,
                                           textSize: 20,
                                           color: Colors.black)),
@@ -161,7 +160,7 @@ class ProfileScreen extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () => pageController.animateToPage(3,
-                                  duration: Duration(milliseconds: 100),
+                                  duration: Duration(milliseconds: 1),
                                   curve: Curves.fastLinearToSlowEaseIn),
                               child: Row(
                                 children: [
@@ -184,7 +183,7 @@ class ProfileScreen extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () => pageController.animateToPage(2,
-                                  duration: const Duration(milliseconds: 200),
+                                  duration: const Duration(milliseconds: 1),
                                   curve: Curves.fastLinearToSlowEaseIn),
                               child: Row(
                                 children: [
@@ -248,7 +247,7 @@ class ProfileScreen extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () => pageController.animateToPage(0,
-                                  duration: const Duration(milliseconds: 100),
+                                  duration: const Duration(milliseconds: 1),
                                   curve: Curves.fastLinearToSlowEaseIn),
                               child: const Align(
                                   alignment: Alignment.topLeft,
@@ -318,7 +317,7 @@ class ProfileScreen extends StatelessWidget {
                             children: [
                               InkWell(
                                 onTap: () => pageController.animateToPage(0,
-                                    duration: Duration(milliseconds: 100),
+                                    duration: Duration(milliseconds: 1),
                                     curve: Curves.fastLinearToSlowEaseIn),
                                 child: const Align(
                                     alignment: Alignment.topLeft,
@@ -361,7 +360,7 @@ class ProfileScreen extends StatelessWidget {
                             children: [
                               InkWell(
                                 onTap: () => pageController.animateToPage(0,
-                                    duration: Duration(milliseconds: 100),
+                                    duration: Duration(milliseconds: 1),
                                     curve: Curves.fastLinearToSlowEaseIn),
                                 child: const Align(
                                     alignment: Alignment.topLeft,
@@ -457,10 +456,10 @@ class ProfileScreen extends StatelessWidget {
                                   Row(
                                     children: [
                                       InkWell(
-                                        onTap: () => pageController
-                                            .animateToPage(0,
+                                        onTap: () =>
+                                            pageController.animateToPage(0,
                                                 duration: const Duration(
-                                                    milliseconds: 10),
+                                                    milliseconds: 1),
                                                 curve: Curves
                                                     .fastLinearToSlowEaseIn),
                                         child: const Align(
@@ -508,7 +507,7 @@ class ProfileScreen extends StatelessWidget {
                                       onTap: () => pageController.animateToPage(
                                           0,
                                           duration:
-                                              const Duration(milliseconds: 10),
+                                              const Duration(milliseconds: 1),
                                           curve: Curves.fastLinearToSlowEaseIn),
                                       child: const Align(
                                           alignment:

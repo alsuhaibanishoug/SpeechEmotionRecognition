@@ -37,7 +37,7 @@ class SpeechToTextScreen extends StatelessWidget {
         }
         if (state is StopRecorderState) {
           pageController.animateToPage(3,
-              duration: const Duration(seconds: 2),
+              duration: const Duration(seconds: 1),
               curve: Curves.fastLinearToSlowEaseIn);
         }
         if (state is GetUserEmoji) {
@@ -46,7 +46,7 @@ class SpeechToTextScreen extends StatelessWidget {
                 context, ResultScreen(SpeechCubit.get(context), isFromMain));
           } else {
             pageController.animateToPage(5,
-                duration: const Duration(seconds: 2),
+                duration: const Duration(seconds: 1),
                 curve: Curves.fastLinearToSlowEaseIn);
           }
         }
@@ -77,7 +77,7 @@ class SpeechToTextScreen extends StatelessWidget {
         title: InkWell(
           onTap: () {
             pageController.animateToPage(4,
-                duration: const Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 1),
                 curve: Curves.fastLinearToSlowEaseIn);
           },
           child: Padding(
