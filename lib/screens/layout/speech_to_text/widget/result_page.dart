@@ -2,9 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:saghi/layout_un_registerd/layout_un_registerd.dart';
 import 'package:saghi/main_layout/main_layout.dart';
 import 'package:saghi/models/audio_model.dart';
 import 'package:saghi/screens/layout/speech_to_text/cubit/speech_cubit.dart';
+import 'package:saghi/screens/layout/speech_to_text/speech_to_text.dart';
 import 'package:saghi/shared/helper/mangers/colors.dart';
 import 'package:saghi/shared/helper/mangers/constants.dart';
 import 'package:saghi/shared/helper/mangers/size_config.dart';
@@ -18,7 +20,7 @@ import '../../../../models/emotion_model.dart';
 class ResultScreen extends StatelessWidget {
   SpeechCubit cubit;
   bool isRegisterd;
-
+  
   ResultScreen(this.cubit, this.isRegisterd);
 
   @override
@@ -163,7 +165,8 @@ class ResultScreen extends StatelessWidget {
                         Column(
                           children: [
                             InkWell(
-                              onTap: () async => Navigator.pop(context),
+                              onTap: () async => navigateToAndFinish(context,
+                                  MainLayout()), //Navigator.pop(context),
                               child: Container(
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
@@ -193,6 +196,19 @@ class ResultScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: SizeConfigManger.bodyHeight * .02),
+              Row(
+                children: [
+                  SizedBox(width: SizeConfigManger.screenWidth * .03),
+                  InkWell(
+                    onTap: () =>
+                        navigateToAndFinish(context, const LayoutUnRegisterd()),
+                    child: const Align(
+                        alignment: Alignment.topLeft,
+                        child: Icon(Icons.arrow_back,
+                            color: Color.fromRGBO(68, 84, 106, 1))),
+                  ),
+                ],
+              ),
               Container(
                 height: SizeConfigManger.bodyHeight * .25,
                 padding: const EdgeInsets.all(20),
@@ -267,69 +283,69 @@ class ResultScreen extends StatelessWidget {
               ),
               SizedBox(height: SizeConfigManger.bodyHeight * .02),
 /*
-              Visibility(
-                visible: FirebaseAuth.instance.currentUser == null,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: SizeConfigManger.bodyHeight * .08),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          InkWell(
-                            onTap: () async {
-                              AudioModel model = AudioModel(
-                                  ConstantsManger.defaultValue,
-                                  FirebaseAuth.instance.currentUser!.uid,
-                                  true,
-                                  cubit.responseModel!.text);
-                              FirebaseFirestore.instance
-                                  .collection(ConstantsManger.FAV)
-                                  .add(model.toMap())
-                                  .then((value) {
+                Visibility(
+                  visible: FirebaseAuth.instance.currentUser == null,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: SizeConfigManger.bodyHeight * .08),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () async {
+                                AudioModel model = AudioModel(
+                                    ConstantsManger.defaultValue,
+                                    FirebaseAuth.instance.currentUser!.uid,
+                                    true,
+                                    cubit.responseModel!.text);
                                 FirebaseFirestore.instance
                                     .collection(ConstantsManger.FAV)
-                                    .doc(value.id)
-                                    .update({"id": value.id});
-                              });
+                                    .add(model.toMap())
+                                    .then((value) {
+                                  FirebaseFirestore.instance
+                                      .collection(ConstantsManger.FAV)
+                                      .doc(value.id)
+                                      .update({"id": value.id});
+                                });
 
-                              Fluttertoast.showToast(
-                                  msg: "Add To Favourite Successfully");
-                              navigateToAndFinish(context, MainLayout());
-                            },
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: ColorsManger.darkPrimary,
+                                Fluttertoast.showToast(
+                                    msg: "Add To Favourite Successfully");
+                                navigateToAndFinish(context, MainLayout());
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: ColorsManger.darkPrimary,
+                                ),
+                                child: Image.asset("assets/images/keep.png"),
                               ),
-                              child: Image.asset("assets/images/keep.png"),
                             ),
-                          ),
-                          AppText(text: "Keep")
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          InkWell(
-                            onTap: () async => Navigator.pop(context),
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: ColorsManger.darkPrimary,
+                            AppText(text: "Keep")
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () async => Navigator.pop(context),
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: ColorsManger.darkPrimary,
+                                ),
+                                child: Image.asset("assets/images/remove.png"),
                               ),
-                              child: Image.asset("assets/images/remove.png"),
                             ),
-                          ),
-                          AppText(text: "Discard"),
-                        ],
-                      ),
-                    ],
+                            AppText(text: "Discard"),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
 */
             ],
           ),

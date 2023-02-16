@@ -252,7 +252,8 @@ class ProfileScreen extends StatelessWidget {
                                   curve: Curves.fastLinearToSlowEaseIn),
                               child: const Align(
                                   alignment: Alignment.topLeft,
-                                  child: Icon(Icons.arrow_back)),
+                                  child: Icon(Icons.arrow_back,
+                                      color: Color.fromRGBO(68, 84, 106, 100))),
                             ),
                             SizedBox(height: SizeConfigManger.bodyHeight * .1),
                             GestureDetector(
@@ -321,7 +322,8 @@ class ProfileScreen extends StatelessWidget {
                                     curve: Curves.fastLinearToSlowEaseIn),
                                 child: const Align(
                                     alignment: Alignment.topLeft,
-                                    child: Icon(Icons.arrow_back)),
+                                    child: Icon(Icons.arrow_back,
+                                        color: Color.fromRGBO(68, 84, 106, 1))),
                               ),
                               SizedBox(
                                   width: SizeConfigManger.bodyHeight * .12),
@@ -339,7 +341,7 @@ class ProfileScreen extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                               textSize: 22,
                               text:
-                                  "SAGHI is an application designed to help hearing-impaired people understand a speaker's emotional state during communication (by communicating in real time or attaching an audio file) by evaluating and displaying the speaker's emotional state in voice notes (happy, neutral, sad, etc.) as well as a transcript of it."),
+                                  "Saghi is an application designed to help hearing-impaired people understand a speaker's emotional state during communication (by communicating in real time or attaching an audio file) by evaluating and displaying the speaker's emotional state in voice notes (happy, neutral, sad, etc.) as well as a transcript of it."),
                           SizedBox(height: SizeConfigManger.bodyHeight * .04),
                           Image.asset(
                             AssetsManger.logo,
@@ -363,10 +365,11 @@ class ProfileScreen extends StatelessWidget {
                                     curve: Curves.fastLinearToSlowEaseIn),
                                 child: const Align(
                                     alignment: Alignment.topLeft,
-                                    child: Icon(Icons.arrow_back)),
+                                    child: Icon(Icons.arrow_back,
+                                        color: Color.fromRGBO(68, 84, 106, 1))),
                               ),
                               SizedBox(
-                                  width: SizeConfigManger.bodyHeight * .15),
+                                  width: SizeConfigManger.bodyHeight * .13),
                               AppText(
                                   text: "Contact us",
                                   fontWeight: FontWeight.w700,
@@ -463,7 +466,9 @@ class ProfileScreen extends StatelessWidget {
                                         child: const Align(
                                             alignment:
                                                 AlignmentDirectional.topStart,
-                                            child: Icon(Icons.arrow_back_ios)),
+                                            child: Icon(Icons.arrow_back,
+                                                color: Color.fromRGBO(
+                                                    68, 84, 106, 1))),
                                       ),
                                       SizedBox(
                                           width: SizeConfigManger.bodyHeight *
@@ -508,7 +513,9 @@ class ProfileScreen extends StatelessWidget {
                                       child: const Align(
                                           alignment:
                                               AlignmentDirectional.topStart,
-                                          child: Icon(Icons.arrow_back_ios)),
+                                          child: Icon(Icons.arrow_back,
+                                              color: Color.fromRGBO(
+                                                  68, 84, 106, 1))),
                                     ),
                                     SizedBox(
                                         width:

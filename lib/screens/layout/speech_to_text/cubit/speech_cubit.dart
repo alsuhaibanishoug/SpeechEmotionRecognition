@@ -143,7 +143,7 @@ class SpeechCubit extends Cubit<SpeechState> {
       double happy = double.parse("${responseModel!.happy}".substring(0, 6));
       double neutral =
           double.parse("${responseModel!.neutral}".substring(0, 6));
-
+      emit(GetUserEmoji());
       listEmotionModel.add(EmotionModel(
           value: angry,
           emojy: AssetsManger.angry,
@@ -185,7 +185,8 @@ class SpeechCubit extends Cubit<SpeechState> {
           emotionModel = element;
         }
       });
-      emit(GetUserEmoji());
+      //emit(GetUserEmoji());
+      emit(ChooseLangModel());
     }).catchError((error) {
       print(error.response.data);
       print(error.response.statusCode);

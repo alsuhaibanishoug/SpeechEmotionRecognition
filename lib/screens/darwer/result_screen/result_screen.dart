@@ -24,9 +24,10 @@ class ResultHistoryScreen extends StatelessWidget {
             appBar: AppBar(
               leading: InkWell(
                   onTap: () => Navigator.pop(context),
-                  child: const Icon(Icons.arrow_back_ios)),
+                  child: const Icon(Icons.arrow_back,
+                      color: Color.fromRGBO(68, 84, 106, 1))),
             ),
-            body: state is GetFavItemsLoading ?
+            body: state is GetFavItemsLoading?
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
