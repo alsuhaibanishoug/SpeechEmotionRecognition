@@ -20,7 +20,7 @@ import '../../../../models/emotion_model.dart';
 class ResultScreen extends StatelessWidget {
   SpeechCubit cubit;
   bool isRegisterd;
-  
+
   ResultScreen(this.cubit, this.isRegisterd);
 
   @override
@@ -32,7 +32,7 @@ class ResultScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: SizeConfigManger.bodyHeight * .02),
+                SizedBox(height: SizeConfigManger.bodyHeight * .04),
                 Container(
                   height: SizeConfigManger.bodyHeight * .25,
                   padding: const EdgeInsets.all(20),
@@ -144,7 +144,7 @@ class ResultScreen extends StatelessWidget {
                                 });
 
                                 Fluttertoast.showToast(
-                                  msg: "Add To Favourite Successfully",
+                                  msg: "Add To Keep Successfully",
                                   backgroundColor: Colors.green,
                                 );
                                 navigateToAndFinish(context, MainLayout());
@@ -174,7 +174,7 @@ class ResultScreen extends StatelessWidget {
                                   color: ColorsManger.darkPrimary,
                                 ),
                                 child: const Icon(Icons.delete,
-                                    color: Colors.white),
+                                    color: Colors.white, size: 27),
                               ),
                             ),
                             AppText(text: "Discard"),
