@@ -95,7 +95,7 @@
                     }
                 },
                 {
-                    "source": "/Users/shoug/Documents/saghi_1 (lib working_ edit)/build/app/generated/res/google-services/debug/values/values.xml",
+                    "source": "/Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/app/generated/res/google-services/debug/values/values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8",
                         "startColumns": "4,4,4,4,4,4,4",
@@ -129,7 +129,7 @@
                     }
                 },
                 {
-                    "source": "/Users/shoug/Documents/saghi_1 (lib working_ edit)/android/app/src/main/res/values/styles.xml",
+                    "source": "/Users/shoug/Documents/GitHub/SpeechEmotionRecognition/android/app/src/main/res/values/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

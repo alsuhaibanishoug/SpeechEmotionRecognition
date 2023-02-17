@@ -4,7 +4,7 @@
             "outputFile": "com.example.saghi.app-mergeDebugResources-16:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Users/shoug/Documents/saghi_1 (lib working_ edit)/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/Users/shoug/Documents/GitHub/SpeechEmotionRecognition/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

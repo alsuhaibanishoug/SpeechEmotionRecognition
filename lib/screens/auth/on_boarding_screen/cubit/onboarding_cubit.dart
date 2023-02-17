@@ -10,13 +10,11 @@ part 'onboarding_state.dart';
 class OnboardingCubit extends Cubit<OnboardingState> {
   OnboardingCubit() : super(OnboardingInitial());
 
-  static OnboardingCubit get(context)=>BlocProvider.of(context);
-
-
+  static OnboardingCubit get(context) => BlocProvider.of(context);
 
   bool isLast = false;
   int currentPage = 0;
-  void changePageViewState(bool from , int page) {
+  void changePageViewState(bool from, int page) {
     isLast = from;
     currentPage = page;
     emit(LastPageView());
@@ -24,7 +22,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
 
   int currentIndex = 0;
 
-  void changeCurrentIndex(index){
+  void changeCurrentIndex(index) {
     currentIndex = index;
     emit(ChangeGuideIndexState());
   }
@@ -59,13 +57,13 @@ class OnboardingCubit extends Cubit<OnboardingState> {
           color: Colors.black54,
         ),
         child: Image.asset(
-          AssetsManger.mic,
+          AssetsManger.listen,
           height: getProportionateScreenHeight(40),
           width: getProportionateScreenHeight(40),
         ),
       ),
       icon: Image.asset(
-        AssetsManger.mic,
+        AssetsManger.listen,
         height: getProportionateScreenHeight(40),
         width: getProportionateScreenHeight(40),
         color: Colors.white,
@@ -94,5 +92,4 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       label: "",
     ),
   ];
-
 }

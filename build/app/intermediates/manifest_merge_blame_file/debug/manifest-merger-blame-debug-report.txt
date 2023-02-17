@@ -13,41 +13,41 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->/Users/shoug/Documents/saghi_1 (lib working_ edit)/android/app/src/main/AndroidManifest.xml:4:5-66
-15-->/Users/shoug/Documents/saghi_1 (lib working_ edit)/android/app/src/main/AndroidManifest.xml:4:22-64
+15-->/Users/shoug/Documents/GitHub/SpeechEmotionRecognition/android/app/src/main/AndroidManifest.xml:4:5-66
+15-->/Users/shoug/Documents/GitHub/SpeechEmotionRecognition/android/app/src/main/AndroidManifest.xml:4:22-64
 16    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-16-->/Users/shoug/Documents/saghi_1 (lib working_ edit)/android/app/src/main/AndroidManifest.xml:5:5-80
-16-->/Users/shoug/Documents/saghi_1 (lib working_ edit)/android/app/src/main/AndroidManifest.xml:5:22-78
+16-->/Users/shoug/Documents/GitHub/SpeechEmotionRecognition/android/app/src/main/AndroidManifest.xml:5:5-80
+16-->/Users/shoug/Documents/GitHub/SpeechEmotionRecognition/android/app/src/main/AndroidManifest.xml:5:22-78
 17    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-17-->/Users/shoug/Documents/saghi_1 (lib working_ edit)/android/app/src/main/AndroidManifest.xml:6:5-70
-17-->/Users/shoug/Documents/saghi_1 (lib working_ edit)/android/app/src/main/AndroidManifest.xml:6:22-68
+17-->/Users/shoug/Documents/GitHub/SpeechEmotionRecognition/android/app/src/main/AndroidManifest.xml:6:5-70
+17-->/Users/shoug/Documents/GitHub/SpeechEmotionRecognition/android/app/src/main/AndroidManifest.xml:6:22-68
 18
 19    <queries>
-19-->/Users/shoug/Documents/saghi_1 (lib working_ edit)/android/app/src/main/AndroidManifest.xml:9:5-13:15
+19-->/Users/shoug/Documents/GitHub/SpeechEmotionRecognition/android/app/src/main/AndroidManifest.xml:9:5-13:15
 20        <intent>
-20-->/Users/shoug/Documents/saghi_1 (lib working_ edit)/android/app/src/main/AndroidManifest.xml:10:9-12:18
+20-->/Users/shoug/Documents/GitHub/SpeechEmotionRecognition/android/app/src/main/AndroidManifest.xml:10:9-12:18
 21            <action android:name="android.speech.RecognitionService" />
-21-->/Users/shoug/Documents/saghi_1 (lib working_ edit)/android/app/src/main/AndroidManifest.xml:11:13-72
-21-->/Users/shoug/Documents/saghi_1 (lib working_ edit)/android/app/src/main/AndroidManifest.xml:11:21-69
+21-->/Users/shoug/Documents/GitHub/SpeechEmotionRecognition/android/app/src/main/AndroidManifest.xml:11:13-72
+21-->/Users/shoug/Documents/GitHub/SpeechEmotionRecognition/android/app/src/main/AndroidManifest.xml:11:21-69
 22        </intent>
 23        <intent>
-23-->[:file_picker] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:12:9-16:18
+23-->[:file_picker] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:12:9-16:18
 24            <action android:name="android.intent.action.GET_CONTENT" />
-24-->[:file_picker] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-72
-24-->[:file_picker] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:13:21-69
+24-->[:file_picker] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-72
+24-->[:file_picker] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:13:21-69
 25
 26            <data android:mimeType="*/*" />
-26-->[:file_picker] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-44
-26-->[:file_picker] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:15:19-41
+26-->[:file_picker] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-44
+26-->[:file_picker] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:15:19-41
 27        </intent>
 28    </queries>
 29
 30    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-30-->[:speech_to_text] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/speech_to_text/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-76
-30-->[:speech_to_text] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/speech_to_text/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-73
+30-->[:speech_to_text] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/speech_to_text/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-76
+30-->[:speech_to_text] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/speech_to_text/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-73
 31    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-31-->[:file_picker] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-80
-31-->[:file_picker] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-77
+31-->[:file_picker] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-80
+31-->[:file_picker] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-77
 32    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 32-->[com.google.firebase:firebase-auth:21.1.0] /Users/shoug/.gradle/caches/transforms-3/65163b33167a0064694ec4084e736e06/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:24:5-79
 32-->[com.google.firebase:firebase-auth:21.1.0] /Users/shoug/.gradle/caches/transforms-3/65163b33167a0064694ec4084e736e06/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:24:22-76
@@ -113,37 +113,37 @@
 80            android:value="2" />
 81
 82        <service
-82-->[:cloud_firestore] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
+82-->[:cloud_firestore] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
 83            android:name="com.google.firebase.components.ComponentDiscoveryService"
-83-->[:cloud_firestore] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-89
+83-->[:cloud_firestore] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-89
 84            android:directBootAware="true"
 84-->[com.google.firebase:firebase-common:20.2.0] /Users/shoug/.gradle/caches/transforms-3/7e997c65a06721ee2a06a879e4b04849/transformed/jetified-firebase-common-20.2.0/AndroidManifest.xml:34:13-43
 85            android:exported="false" >
 85-->[com.google.firebase:firebase-auth:21.1.0] /Users/shoug/.gradle/caches/transforms-3/65163b33167a0064694ec4084e736e06/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:66:13-37
 86            <meta-data
-86-->[:cloud_firestore] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+86-->[:cloud_firestore] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 87                android:name="com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar"
-87-->[:cloud_firestore] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-134
+87-->[:cloud_firestore] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-134
 88                android:value="com.google.firebase.components.ComponentRegistrar" />
-88-->[:cloud_firestore] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+88-->[:cloud_firestore] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 89            <meta-data
-89-->[:firebase_auth] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+89-->[:firebase_auth] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 90                android:name="com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar"
-90-->[:firebase_auth] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
+90-->[:firebase_auth] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
 91                android:value="com.google.firebase.components.ComponentRegistrar" />
-91-->[:firebase_auth] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+91-->[:firebase_auth] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 92            <meta-data
-92-->[:firebase_storage] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+92-->[:firebase_storage] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 93                android:name="com.google.firebase.components:io.flutter.plugins.firebase.storage.FlutterFirebaseAppRegistrar"
-93-->[:firebase_storage] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-126
+93-->[:firebase_storage] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-126
 94                android:value="com.google.firebase.components.ComponentRegistrar" />
-94-->[:firebase_storage] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+94-->[:firebase_storage] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 95            <meta-data
-95-->[:firebase_core] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+95-->[:firebase_core] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 96                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
-96-->[:firebase_core] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
+96-->[:firebase_core] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
 97                android:value="com.google.firebase.components.ComponentRegistrar" />
-97-->[:firebase_core] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+97-->[:firebase_core] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 98            <meta-data
 98-->[com.google.firebase:firebase-auth:21.1.0] /Users/shoug/.gradle/caches/transforms-3/65163b33167a0064694ec4084e736e06/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:67:13-69:85
 99                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
@@ -177,67 +177,67 @@
 113        </service>
 114
 115        <provider
-115-->[:image_picker_android] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
+115-->[:image_picker_android] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
 116            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-116-->[:image_picker_android] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-82
+116-->[:image_picker_android] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-82
 117            android:authorities="com.example.saghi.flutter.image_provider"
-117-->[:image_picker_android] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-74
+117-->[:image_picker_android] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-74
 118            android:exported="false"
-118-->[:image_picker_android] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
+118-->[:image_picker_android] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
 119            android:grantUriPermissions="true" >
-119-->[:image_picker_android] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-47
+119-->[:image_picker_android] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-47
 120            <meta-data
-120-->[:image_picker_android] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-17:75
+120-->[:image_picker_android] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-17:75
 121                android:name="android.support.FILE_PROVIDER_PATHS"
-121-->[:image_picker_android] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-67
+121-->[:image_picker_android] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-67
 122                android:resource="@xml/flutter_image_picker_file_paths" />
-122-->[:image_picker_android] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:17:17-72
+122-->[:image_picker_android] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:17:17-72
 123        </provider>
 124
 125        <activity
-125-->[:url_launcher_android] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-13:74
+125-->[:url_launcher_android] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-13:74
 126            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-126-->[:url_launcher_android] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-74
+126-->[:url_launcher_android] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-74
 127            android:exported="false"
-127-->[:url_launcher_android] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-37
+127-->[:url_launcher_android] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-37
 128            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-128-->[:url_launcher_android] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-71
+128-->[:url_launcher_android] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-71
 129        <!--
 130           Declares a provider which allows us to store files to share in
 131           '.../caches/share_plus' and grant the receiving action access
 132        -->
 133        <provider
-133-->[:share_plus] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:15:9-23:20
+133-->[:share_plus] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:15:9-23:20
 134            android:name="dev.fluttercommunity.plus.share.ShareFileProvider"
-134-->[:share_plus] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-77
+134-->[:share_plus] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-77
 135            android:authorities="com.example.saghi.flutter.share_provider"
-135-->[:share_plus] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-74
+135-->[:share_plus] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-74
 136            android:exported="false"
-136-->[:share_plus] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-37
+136-->[:share_plus] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-37
 137            android:grantUriPermissions="true" >
-137-->[:share_plus] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:19:13-47
+137-->[:share_plus] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:19:13-47
 138            <meta-data
-138-->[:image_picker_android] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-17:75
+138-->[:image_picker_android] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-17:75
 139                android:name="android.support.FILE_PROVIDER_PATHS"
-139-->[:image_picker_android] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-67
+139-->[:image_picker_android] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-67
 140                android:resource="@xml/flutter_share_file_paths" />
-140-->[:image_picker_android] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:17:17-72
+140-->[:image_picker_android] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:17:17-72
 141        </provider>
 142        <!--
 143           This manifest declared broadcast receiver allows us to use an explicit
 144           Intent when creating a PendingItent to be informed of the user's choice
 145        -->
 146        <receiver
-146-->[:share_plus] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:28:9-34:20
+146-->[:share_plus] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:28:9-34:20
 147            android:name="dev.fluttercommunity.plus.share.SharePlusPendingIntent"
-147-->[:share_plus] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-82
+147-->[:share_plus] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-82
 148            android:exported="true" >
-148-->[:share_plus] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:30:13-36
+148-->[:share_plus] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:30:13-36
 149            <intent-filter>
-149-->[:share_plus] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:31:13-33:29
+149-->[:share_plus] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:31:13-33:29
 150                <action android:name="EXTRA_CHOSEN_COMPONENT" />
-150-->[:share_plus] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:32:17-65
-150-->[:share_plus] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:32:25-62
+150-->[:share_plus] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:32:17-65
+150-->[:share_plus] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:32:25-62
 151            </intent-filter>
 152        </receiver>
 153
@@ -280,7 +280,7 @@
 171-->[com.google.firebase:firebase-auth:21.1.0] /Users/shoug/.gradle/caches/transforms-3/65163b33167a0064694ec4084e736e06/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:37:27-75
 172
 173                <data
-173-->[:file_picker] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-44
+173-->[:file_picker] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-44
 174                    android:host="firebase.auth"
 175                    android:path="/"
 176                    android:scheme="genericidp" />
@@ -312,7 +312,7 @@
 189-->[com.google.firebase:firebase-auth:21.1.0] /Users/shoug/.gradle/caches/transforms-3/65163b33167a0064694ec4084e736e06/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:37:27-75
 190
 191                <data
-191-->[:file_picker] /Users/shoug/Documents/saghi_1 (lib working_ edit)/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-44
+191-->[:file_picker] /Users/shoug/Documents/GitHub/SpeechEmotionRecognition/build/file_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-44
 192                    android:host="firebase.auth"
 193                    android:path="/"
 194                    android:scheme="recaptcha" />

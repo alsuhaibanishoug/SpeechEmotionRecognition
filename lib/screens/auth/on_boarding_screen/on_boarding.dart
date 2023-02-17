@@ -13,7 +13,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'widget/custom_page_view.dart';
 
-
 class OnBoardingScreen extends StatelessWidget {
   var boardController = PageController(initialPage: 0);
   int currentPage = 0;
@@ -33,23 +32,30 @@ class OnBoardingScreen extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: Colors.white,
               elevation: 0.0,
-              title: AppText(
-                  text: "Guidelines",
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  textSize: 22),
+              title: Column(
+                children: [
+                  SizedBox(height: SizeConfigManger.bodyHeight * .04),
+                  AppText(
+                      text: "Guidelines",
+                      color: ColorsManger.darkPrimary,
+                      align: TextAlign.center,
+                      fontWeight: FontWeight.bold,
+                      textSize: 30)
+                ],
+              ),
               actions: [
-                cubit.currentPage != 3 ?
-                IconButton(onPressed: () {},
-                    icon: Icon(Icons.help_center, color: ColorsManger.grey)):
-                Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.grey[300]
-                  ),
-                  child: IconButton(onPressed: () {},
-                      icon: Icon(Icons.help_center, color: ColorsManger.darkPrimary)),
-                )
+                cubit.currentPage != 3
+                    ? IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.help_center, color: ColorsManger.grey))
+                    : Container(
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.grey[300]),
+                        child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.help_center,
+                                color: ColorsManger.darkPrimary)),
+                      )
               ],
             ),
             body: Center(
@@ -71,11 +77,11 @@ class OnBoardingScreen extends StatelessWidget {
                             cubit.changeCurrentIndex(index);
                           }
                           if (index == splashData.length - 1) {
-                            OnboardingCubit.get(context).changePageViewState(
-                                true, index);
+                            OnboardingCubit.get(context)
+                                .changePageViewState(true, index);
                           } else {
-                            OnboardingCubit.get(context).changePageViewState(
-                                false, index);
+                            OnboardingCubit.get(context)
+                                .changePageViewState(false, index);
                           }
                         },
                         physics: const BouncingScrollPhysics(),
@@ -101,60 +107,62 @@ class OnBoardingScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: SizeConfigManger.bodyHeight * .04),
-                    cubit.currentPage == 3 ?
-                    InkWell(
-                      onTap: ()async {
-                       await CachedHelper.saveBool(key: ConstantsManger.onBoadring, value: true);
-                       navigateToAndFinish(context, const LayoutUnRegisterd());
-                      },
-                      child: Align(
-                        alignment: AlignmentDirectional.topEnd,
-                        child: Container(
-                          width: SizeConfigManger.screenWidth * .3,
-                          height: SizeConfigManger.bodyHeight * .08,
-                          decoration: BoxDecoration(
-                              color: ColorsManger.darkPrimary,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Center(
-                              child: AppText(
-                                text: "Close",
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              )),
-                        ),
-                      ),
-                    ) :
-                    InkWell(
-                      onTap: () {
-                        boardController.nextPage(
-                            duration: const Duration(
-                              milliseconds: 750,
+                    cubit.currentPage == 3
+                        ? InkWell(
+                            onTap: () async {
+                              await CachedHelper.saveBool(
+                                  key: ConstantsManger.onBoadring, value: true);
+                              navigateToAndFinish(
+                                  context, const LayoutUnRegisterd());
+                            },
+                            child: Align(
+                              alignment: AlignmentDirectional.topEnd,
+                              child: Container(
+                                width: SizeConfigManger.screenWidth * .3,
+                                height: SizeConfigManger.bodyHeight * .08,
+                                decoration: BoxDecoration(
+                                    color: ColorsManger.darkPrimary,
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Center(
+                                    child: AppText(
+                                  text: "Close",
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                )),
+                              ),
                             ),
-                            curve: Curves.fastLinearToSlowEaseIn);
-                      },
-                      child: Align(
-                        alignment: AlignmentDirectional.topEnd,
-                        child: Container(
-                          width: SizeConfigManger.screenWidth * .3,
-                          height: SizeConfigManger.bodyHeight * .08,
-                          decoration: BoxDecoration(
-                              color: ColorsManger.darkPrimary,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Center(
-                              child: AppText(
-                                text: "Skip",
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              )),
-                        ),
-                      ),
-                    ),
+                          )
+                        : InkWell(
+                            onTap: () {
+                              boardController.nextPage(
+                                  duration: const Duration(
+                                    milliseconds: 750,
+                                  ),
+                                  curve: Curves.fastLinearToSlowEaseIn);
+                            },
+                            child: Align(
+                              alignment: AlignmentDirectional.topEnd,
+                              child: Container(
+                                width: SizeConfigManger.screenWidth * .3,
+                                height: SizeConfigManger.bodyHeight * .08,
+                                decoration: BoxDecoration(
+                                    color: ColorsManger.darkPrimary,
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Center(
+                                    child: AppText(
+                                  text: "Skip",
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                )),
+                              ),
+                            ),
+                          ),
                   ],
                 ),
               ),
             ),
             bottomNavigationBar: Visibility(
-              visible: cubit.currentPage != 3,
+              visible: cubit.currentPage != 4,
               child: BottomNavigationBar(
                 items: cubit.bottomNavItems,
                 currentIndex: cubit.currentIndex,
@@ -169,19 +177,23 @@ class OnBoardingScreen extends StatelessWidget {
   List<Map<String, String>> splashData = [
     {
       "title": "Text to speech icon",
-      "details": "You will be taken to a Text to Speech page, there you can write a text that will be converted into an audio speech."
+      "details":
+          "You will be taken to a Text to Speech page, there you can write a text that will be converted into an audio speech."
     },
     {
       "title": "Saghi icon",
-      "details": "You will be taken to the home page, there you can record a real-time audio or upload an audio file that will be converted into a text."
+      "details":
+          "You will be taken to the home page, there you can record a real-time audio or upload an audio file that will be converted into a text."
     },
     {
       "title": "Account icon",
-      "details": "You will be taken to your personal accaccount page (or a sign in/sign up page), there you can edit your profile and check your Keep results."
+      "details":
+          "You will be taken to your personal accaccount page (or a sign in/sign up page), there you can edit your profile and check your Keep results."
     },
     {
       "title": "Help Icon ",
-      "details": "You will be taken through a tour of how to use the page you are at."
+      "details":
+          "You will be taken through a tour of how to use the page you are at."
     },
   ];
 }

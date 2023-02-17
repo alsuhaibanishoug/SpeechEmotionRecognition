@@ -21,7 +21,7 @@ class GuidelinessCubit extends Cubit<GuidelinessState> {
 
   int currentIndex = 0;
 
-  void changeCurrentIndex(index){
+  void changeCurrentIndex(index) {
     currentIndex = index;
     emit(ChangeGuideIndexState());
   }
@@ -59,6 +59,7 @@ class GuidelinessCubit extends Cubit<GuidelinessState> {
           AssetsManger.mic,
           height: getProportionateScreenHeight(40),
           width: getProportionateScreenHeight(40),
+          color: Colors.white,
         ),
       ),
       icon: Image.asset(
