@@ -118,80 +118,102 @@ class SpeechToTextScreen extends StatelessWidget {
       appBar: createAppBar(context, state),
       body: Column(
         children: [
-          SizedBox(height: SizeConfigManger.bodyHeight * .45),
-          AppText(
-              text: cubit.isPlaying ? " Tap To Stop" : " Tap To Record",
-              textSize: 20),
-          Padding(
-            padding: const EdgeInsetsDirectional.only(start: 80),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                state is UploadAudioLoading
-                    ? const Center(
-                        child: CircularProgressIndicator(color: Colors.blue),
-                      )
-                    : Container(
-                        child: AvatarGlow(
-                          endRadius: 80,
-                          animate: cubit.isPlaying,
-                          glowColor: ColorsManger.orangePrimary,
-                          child: FloatingActionButton.large(
-                              backgroundColor: cubit.isPlaying
-                                  ? ColorsManger.orangePrimary
-                                  : ColorsManger.darkPrimary,
-                              onPressed: () {
-                                if (cubit.lang == null) {
-                                  showToast(
-                                    msg: "please choose language first",
-                                    gravity: ToastGravity.CENTER,
-                                    color: Colors.red,
-                                  );
-                                } else {
-                                  cubit.isPlaying
-                                      ? cubit.stop()
-                                      : cubit.start();
-                                }
+          state is UploadAudioLoading
+              ? Center(
+                  child: Column(
+                    children: [
+                      SizedBox(height: SizeConfigManger.bodyHeight * .54),
+                      const CustomLoading(),
+                    ],
+                  ),
+                )
+              : Column(
+                  children: [
+                    SizedBox(height: SizeConfigManger.bodyHeight * .45),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AppText(
+                            text: cubit.isPlaying
+                                ? " Tap To Stop"
+                                : " Tap To Record",
+                            textSize: 20),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(start: 80),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            child: AvatarGlow(
+                              endRadius: 80,
+                              animate: cubit.isPlaying,
+                              glowColor: ColorsManger.orangePrimary,
+                              child: FloatingActionButton.large(
+                                  backgroundColor: cubit.isPlaying
+                                      ? ColorsManger.orangePrimary
+                                      : ColorsManger.darkPrimary,
+                                  onPressed: () {
+                                    if (cubit.lang == null) {
+                                      showToast(
+                                        msg: "please choose language first",
+                                        gravity: ToastGravity.CENTER,
+                                        color: Colors.red,
+                                      );
+                                    } else {
+                                      cubit.isPlaying
+                                          ? cubit.stop()
+                                          : cubit.start();
+                                    }
+                                  },
+                                  child: cubit.isPlaying
+                                      ? Icon(Icons.square_rounded, size: 40)
+                                      : Icon(Icons.mic, size: 70)),
+                            ),
+                          ),
+                          SizedBox(width: SizeConfigManger.bodyHeight * .02),
+                          PopupMenuButton<LanguageModel>(
+                              icon: Image.asset('assets/icons/lang.png'),
+                              onSelected: (LanguageModel item) async {
+                                cubit.changeLanguage(
+                                    langCode: item.languageCode);
+                                cubit.chooseLangModel(item);
                               },
-                              child: cubit.isPlaying
-                                  ? Icon(Icons.square_rounded, size: 40)
-                                  : Icon(Icons.mic, size: 70)),
-                        ),
+                              itemBuilder: (BuildContext context) =>
+                                  <PopupMenuEntry<LanguageModel>>[
+                                    PopupMenuItem<LanguageModel>(
+                                      value: LanguageModel.choices[0],
+                                      child: Row(
+                                        children: [
+                                          SizedBox(
+                                              width:
+                                                  SizeConfigManger.bodyHeight *
+                                                      .02),
+                                          AppText(text: "English")
+                                        ],
+                                      ),
+                                    ),
+                                    PopupMenuItem<LanguageModel>(
+                                      value: LanguageModel.choices[1],
+                                      child: Row(
+                                        children: [
+                                          SizedBox(
+                                              width:
+                                                  SizeConfigManger.bodyHeight *
+                                                      .02),
+                                          AppText(text: "Arabic")
+                                        ],
+                                      ),
+                                    ),
+                                  ]),
+                        ],
                       ),
-                SizedBox(width: SizeConfigManger.bodyHeight * .02),
-                PopupMenuButton<LanguageModel>(
-                    icon: Image.asset('assets/icons/lang.png'),
-                    onSelected: (LanguageModel item) async {
-                      cubit.changeLanguage(langCode: item.languageCode);
-                      cubit.chooseLangModel(item);
-                    },
-                    itemBuilder: (BuildContext context) =>
-                        <PopupMenuEntry<LanguageModel>>[
-                          PopupMenuItem<LanguageModel>(
-                            value: LanguageModel.choices[0],
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                    width: SizeConfigManger.bodyHeight * .02),
-                                AppText(text: "English")
-                              ],
-                            ),
-                          ),
-                          PopupMenuItem<LanguageModel>(
-                            value: LanguageModel.choices[1],
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                    width: SizeConfigManger.bodyHeight * .02),
-                                AppText(text: "Arabic")
-                              ],
-                            ),
-                          ),
-                        ]),
-              ],
-            ),
-          ),
+                    ),
+                  ],
+                ),
         ],
       ),
     );
@@ -206,10 +228,6 @@ class SpeechToTextScreen extends StatelessWidget {
           height: SizeConfigManger.bodyHeight * .4,
           padding: const EdgeInsets.all(20),
           width: SizeConfigManger.screenWidth * 0.8,
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              borderRadius:
-                  BorderRadius.circular(getProportionateScreenHeight(20))),
           child: AppText(
             text: "cubit.lastWords",
             maxLines: 25,
@@ -230,7 +248,6 @@ class SpeechToTextScreen extends StatelessWidget {
               shape: BoxShape.circle,
               color: ColorsManger.darkPrimary,
             ),
-            child: const Icon(Icons.mic_off, size: 60, color: Colors.white),
           ),
         ),
         Padding(
@@ -267,8 +284,6 @@ class SpeechToTextScreen extends StatelessWidget {
                       shape: BoxShape.circle,
                       color: ColorsManger.darkPrimary,
                     ),
-                    child:
-                        const Icon(Icons.send, size: 40, color: Colors.white),
                   ),
                 ),
               ),

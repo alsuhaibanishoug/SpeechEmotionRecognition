@@ -32,3 +32,5 @@ class UpdateProfileInfo extends MainState {}
 class initStatePlayingState extends MainState {}
 
 class GetAllResultListState extends MainState {}
+
+class UploadAudioLoading extends MainState {}

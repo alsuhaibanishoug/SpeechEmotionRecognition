@@ -7,6 +7,7 @@ import 'package:saghi/models/language_model.dart';
 import 'package:saghi/screens/layout/text_to_speech/widgets/text_to_speech_guideline.dart';
 import 'package:saghi/shared/helper/mangers/colors.dart';
 import 'package:saghi/shared/helper/mangers/size_config.dart';
+import 'package:saghi/widget/custom_loading.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:showcaseview/showcaseview.dart';
 
@@ -87,85 +88,116 @@ class TextToSpeechScreen extends StatelessWidget {
                     Visibility(
                       visible: cubit.soundUrl == null,
                       child: Column(children: [
-                        SizedBox(height: SizeConfigManger.bodyHeight * .04),
-                        Center(
-                            child:
-                                AppText(text: "Tap To Convert", textSize: 20)),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.only(
-                              start: 80, top: 10),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  if (cubit.lang == null) {
-                                    Fluttertoast.showToast(
-                                      msg: "please choose language first",
-                                      gravity: ToastGravity.CENTER,
-                                      backgroundColor: Colors.red,
-                                    );
-                                  } else {
-                                    if (formKey.currentState!.validate()) {
-                                      cubit.createAudioScript(
-                                          script: text.text);
-                                      Fluttertoast.showToast(
-                                        msg: "Your text is being converted",
-                                        backgroundColor:
-                                            ColorsManger.darkPrimary,
-                                        gravity: ToastGravity.CENTER,
-                                      );
-                                    }
-                                  }
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: ColorsManger.darkPrimary,
-                                  ),
-                                  child: const Icon(Icons.change_circle,
-                                      size: 80, color: Colors.white),
+                        state is UploadAudioLoading
+                            ? Center(
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                        height:
+                                            SizeConfigManger.bodyHeight * .08),
+                                    const CustomLoading(),
+                                  ],
                                 ),
+                              )
+                            : Column(
+                                children: [
+                                  SizedBox(
+                                      height:
+                                          SizeConfigManger.bodyHeight * .04),
+                                  Center(
+                                      child: AppText(
+                                          text: "Tap To Convert",
+                                          textSize: 20)),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.only(
+                                        start: 80, top: 10),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            if (cubit.lang == null) {
+                                              Fluttertoast.showToast(
+                                                msg:
+                                                    "please choose language first",
+                                                gravity: ToastGravity.CENTER,
+                                                backgroundColor: Colors.red,
+                                              );
+                                            } else {
+                                              if (formKey.currentState!
+                                                  .validate()) {
+                                                cubit.createAudioScript(
+                                                    script: text.text);
+                                                Fluttertoast.showToast(
+                                                  msg:
+                                                      "Your text is being converted",
+                                                  backgroundColor:
+                                                      ColorsManger.darkPrimary,
+                                                  gravity: ToastGravity.CENTER,
+                                                );
+                                              }
+                                            }
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: ColorsManger.darkPrimary,
+                                            ),
+                                            child: const Icon(
+                                                Icons.change_circle,
+                                                size: 80,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                            width: SizeConfigManger.bodyHeight *
+                                                .05),
+                                        PopupMenuButton<LanguageModel>(
+                                            icon: Image.asset(
+                                                'assets/icons/lang.png'),
+                                            onSelected:
+                                                (LanguageModel item) async {
+                                              cubit.changeLanguage(
+                                                  langCode: item.languageCode);
+                                            },
+                                            itemBuilder: (BuildContext
+                                                    context) =>
+                                                <PopupMenuEntry<LanguageModel>>[
+                                                  PopupMenuItem<LanguageModel>(
+                                                    value: LanguageModel
+                                                        .choices[0],
+                                                    child: Row(
+                                                      children: [
+                                                        SizedBox(
+                                                            width: SizeConfigManger
+                                                                    .bodyHeight *
+                                                                .02),
+                                                        AppText(text: "English")
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  PopupMenuItem<LanguageModel>(
+                                                    value: LanguageModel
+                                                        .choices[1],
+                                                    child: Row(
+                                                      children: [
+                                                        SizedBox(
+                                                            width: SizeConfigManger
+                                                                    .bodyHeight *
+                                                                .02),
+                                                        AppText(text: "Arabic")
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ]),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                  width: SizeConfigManger.bodyHeight * .05),
-                              PopupMenuButton<LanguageModel>(
-                                  icon: Image.asset('assets/icons/lang.png'),
-                                  onSelected: (LanguageModel item) async {
-                                    cubit.changeLanguage(
-                                        langCode: item.languageCode);
-                                  },
-                                  itemBuilder: (BuildContext context) =>
-                                      <PopupMenuEntry<LanguageModel>>[
-                                        PopupMenuItem<LanguageModel>(
-                                          value: LanguageModel.choices[0],
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                  width: SizeConfigManger
-                                                          .bodyHeight *
-                                                      .02),
-                                              AppText(text: "English")
-                                            ],
-                                          ),
-                                        ),
-                                        PopupMenuItem<LanguageModel>(
-                                          value: LanguageModel.choices[1],
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                  width: SizeConfigManger
-                                                          .bodyHeight *
-                                                      .02),
-                                              AppText(text: "Arabic")
-                                            ],
-                                          ),
-                                        ),
-                                      ]),
-                            ],
-                          ),
-                        ),
                       ]),
                     ),
                     Visibility(

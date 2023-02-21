@@ -176,7 +176,7 @@ class MainCubit extends Cubit<MainState> {
     await _flutterTts.setVolume(1.0);
     await _flutterTts.setPitch(1.0);
     if (Platform.isIOS) _flutterTts.setSharedInstance(true);
-
+    emit(UploadAudioLoading());
     fileName = Platform.isAndroid ? 'name.wav' : 'name.caf';
 
     await _flutterTts.synthesizeToFile(script, fileName);
