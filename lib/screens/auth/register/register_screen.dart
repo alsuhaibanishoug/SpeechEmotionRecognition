@@ -1,6 +1,10 @@
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saghi/layout_un_registerd/layout_un_registerd.dart';
 import 'package:saghi/screens/auth/register/cubit/register_cubit.dart';
+import 'package:saghi/screens/layout/profile/profile.dart';
 import 'package:saghi/shared/helper/mangers/assets_manger.dart';
 import 'package:saghi/shared/helper/mangers/colors.dart';
 import 'package:saghi/shared/helper/mangers/size_config.dart';
@@ -52,7 +56,22 @@ class RegisterScreen extends StatelessWidget {
                           horizontal: SizeConfigManger.bodyHeight * .04),
                       child: Column(
                         children: [
-                          SizedBox(height: SizeConfigManger.bodyHeight * 0.1),
+                          SizedBox(height: SizeConfigManger.bodyHeight * 0.03),
+                          GestureDetector(
+                            onTap: () => navigateToAndFinish(
+                                context, const LayoutUnRegisterd()),
+                            child: Row(
+                              children: [
+                                AppText(
+                                  text: "Cancel",
+                                  fontWeight: FontWeight.w400,
+                                  textSize: 24,
+                                  color: ColorsManger.darkPrimary,
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: SizeConfigManger.bodyHeight * 0.02),
                           Image.asset(
                             AssetsManger.logo,
                             height: SizeConfigManger.bodyHeight * .25,
@@ -129,7 +148,10 @@ class RegisterScreen extends StatelessWidget {
                                     if (formKey.currentState!.validate()) {
                                       cubit.registerNewUser(
                                           email: email.text,
-                                          password: password.text,
+                                          password: sha256
+                                              .convert(
+                                                  utf8.encode(password.text))
+                                              .toString(), //password.text,
                                           firstName: firstName.text,
                                           lastName: lastName.text);
                                     }

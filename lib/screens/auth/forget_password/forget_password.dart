@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:saghi/layout_un_registerd/layout_un_registerd.dart';
 import 'package:saghi/screens/auth/forget_password/cubit/forget_cubit.dart';
-import 'package:saghi/screens/auth/login/login_screen.dart';
 import 'package:saghi/shared/helper/mangers/assets_manger.dart';
 import 'package:saghi/shared/helper/mangers/colors.dart';
 import 'package:saghi/shared/helper/mangers/size_config.dart';

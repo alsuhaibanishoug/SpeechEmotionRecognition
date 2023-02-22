@@ -1,5 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -619,7 +622,9 @@ class ProfileScreen extends StatelessWidget {
                                   if (formKey.currentState!.validate()) {
                                     cubit.signIn(
                                         email: email.text,
-                                        password: password.text);
+                                        password: sha256
+                                            .convert(utf8.encode(password.text))
+                                            .toString());
                                   }
                                 },
                                 text: "Sign in",

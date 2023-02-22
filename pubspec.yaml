@@ -51,6 +51,7 @@ dependencies:
   permission_handler: ^10.2.0
   record: ^4.4.4
   flutter_audio_recorder3: ^0.0.5
+  crypto: ^3.0.2
 
 
 
