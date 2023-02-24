@@ -11,10 +11,6 @@ import speech_recognition as sr
 from pydub.silence import split_on_silence
 #pip install arabic_reshaper
 import arabic_reshaper
-#pip install python-bidi
-from bidi.algorithm import get_display
-
-
 
 
 app = Flask(__name__, template_folder='template')
@@ -115,12 +111,8 @@ def audio_transcription(path, lang):
                 whole_text += text
 
     if(lang == 'ar'):
-        reshaped_text = arabic_reshaper.reshape(whole_text)    # correct its shape
-        whole_text = get_display(reshaped_text)                # correct its direction
-
-
-    whole_text = whole_text[:-1]
-    whole_text+='.'
+        whole_text = arabic_reshaper.reshape(whole_text)    # correct its shape
+                  
     return whole_text
 
 
