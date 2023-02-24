@@ -11,8 +11,6 @@ import speech_recognition as sr
 from pydub.silence import split_on_silence
 #pip install arabic_reshaper
 import arabic_reshaper
-#pip install python-bidi
-from bidi.algorithm import get_display
 
 
 
@@ -50,7 +48,7 @@ def extract_features(data, sample_rate):
 
 def get_features(path):
     # duration and offset are used to take care of the no audio in start and the ending of each audio files as seen above.
-    data, sample_rate = librosa.load(path, offset=0.4)
+    data, sample_rate = librosa.load(path, sr=None, offset=0.4)
     data = data.T
 
     result = extract_features(data,sample_rate)
@@ -114,13 +112,11 @@ def audio_transcription(path, lang):
                 text = f" {text.capitalize()},"
                 whole_text += text
 
-    if(lang == 'ar'):
-        reshaped_text = arabic_reshaper.reshape(whole_text)    # correct its shape
-        whole_text = get_display(reshaped_text)                # correct its direction
-
-
     whole_text = whole_text[:-1]
-    whole_text+='.'
+
+    if(lang == 'ar'):
+        whole_text = arabic_reshaper.reshape(whole_text)    # correct its shape
+
     return whole_text
 
 
@@ -150,8 +146,9 @@ def home():
             else:
                 text = audio_transcription(uploaded_file, 'en')
 
-            responce['text']= text
-
+            responce['text'] = text
+            #jsonDict  = json.dumps(responce, ensure_ascii=False).encode()
+            #json.loads(jsonDict)
             return responce
 
     return render_template('index.html')
