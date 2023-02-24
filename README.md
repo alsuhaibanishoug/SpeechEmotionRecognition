@@ -1,16 +1,8 @@
-# saghi
+# Saghi
 
-A new Flutter project.
+Saghi is a mobile application that aims to help deaf and hard of hearing people understand different emotions in voice communication using a speech emotion recognition algorithm. By using the user voice during virtual communications and analyze it to get the text and the mood/emotional state (happy, furious, sad, etc.) of the speaker based on some speech features. On the other side, the user can also write a text and get the speech as an audio file and share it with others. The CNN algorithm has been implemented in the SER and the number of datasets used is six (tow Arabic, four English), moreover the application was built using Flutter as a platform and dart as a programming language.
 
-## Getting Started
+## Supported Devices
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- iOS
+- android 
